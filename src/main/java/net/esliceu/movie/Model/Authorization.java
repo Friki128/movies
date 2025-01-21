@@ -7,34 +7,22 @@ import java.util.List;
 @Entity(name="authorization")
 public class Authorization {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="authorization_id")
-    private int id;
+    @EmbeddedId
+    private AuthorizationId id;
 
     @Column(name="authorization_status")
     private String status;
 
-    @ManyToOne
-    @JoinColumn(name="permission_id")
-    private  Permission permission;
-
-    @ManyToOne
-    @JoinColumn(name="user_id")
-    private User user;
-
-    public Authorization(int id, String status, Permission permission, User user) {
+    public Authorization(AuthorizationId id, String status) {
         this.id = id;
         this.status = status;
-        this.permission = permission;
-        this.user = user;
     }
 
-    public int getId() {
+    public AuthorizationId getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(AuthorizationId id) {
         this.id = id;
     }
 
@@ -44,21 +32,5 @@ public class Authorization {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public Permission getPermission() {
-        return permission;
-    }
-
-    public void setPermission(Permission permission) {
-        this.permission = permission;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }
