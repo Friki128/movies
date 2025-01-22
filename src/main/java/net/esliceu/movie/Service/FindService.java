@@ -4,6 +4,7 @@ import net.esliceu.movie.DAO.*;
 import net.esliceu.movie.Exceptions.ObjectNotFoundException;
 import net.esliceu.movie.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -51,105 +52,70 @@ public class FindService {
     @Autowired
     private UserRepo userRepo;
 
+    protected  <v> v getValue(Object id, JpaRepository repo) throws ObjectNotFoundException {
+        Optional<v> value = repo.findById(id);
+        if(value.isEmpty()) throw new ObjectNotFoundException();
+        return value.get();
+    }
     public Authorization getAuthorization(AuthorizationId id) throws ObjectNotFoundException {
-        Optional<Authorization> authorization = authorizationRepo.findById(id);
-        if(authorization.isEmpty())throw new ObjectNotFoundException();
-        return authorization.get();
+        return getValue(id, authorizationRepo);
     }
     public Cast getCast(CastId id) throws ObjectNotFoundException {
-        Optional<Cast> cast = castRepo.findById(id);
-        if(cast.isEmpty())throw new ObjectNotFoundException();
-        return cast.get();
+        return getValue(id, castRepo);
     }
     public Company getCompany(int id) throws ObjectNotFoundException {
-        Optional<Company> company = companyRepo.findById(id);
-        if(company.isEmpty())throw new ObjectNotFoundException();
-        return company.get();
+        return getValue(id, companyRepo);
     }
     public CompanyCountry getCompanyCountry(CompanyCountryId id) throws ObjectNotFoundException {
-        Optional<CompanyCountry> companyCountry = companyCountryRepo.findById(id);
-        if(companyCountry.isEmpty())throw new ObjectNotFoundException();
-        return companyCountry.get();
+        return getValue(id, companyCountryRepo);
     }
     public Country getCountry(int id) throws ObjectNotFoundException {
-        Optional<Country> country = countryRepo.findById(id);
-        if(country.isEmpty())throw new ObjectNotFoundException();
-        return country.get();
+        return getValue(id, countryRepo);
     }
     public CrewMember getCrewMember(CrewMemberId id) throws ObjectNotFoundException {
-        Optional<CrewMember> crewMember = crewMemberRepo.findById(id);
-        if(crewMember.isEmpty())throw new ObjectNotFoundException();
-        return crewMember.get();
+        return getValue(id, crewMemberRepo);
     }
     public Department getDepartment(int id) throws ObjectNotFoundException {
-        Optional<Department> department = departmentRepo.findById(id);
-        if(department.isEmpty())throw new ObjectNotFoundException();
-        return department.get();
+        return getValue(id, departmentRepo);
     }
     public Gender getGender(int id) throws ObjectNotFoundException {
-        Optional<Gender> gender = genderRepo.findById(id);
-        if(gender.isEmpty())throw new ObjectNotFoundException();
-        return gender.get();
+        return getValue(id, genderRepo);
     }
     public Genre getGenre(int id) throws ObjectNotFoundException {
-        Optional<Genre> genre = genreRepo.findById(id);
-        if(genre.isEmpty())throw new ObjectNotFoundException();
-        return genre.get();
+        return getValue(id, genreRepo);
     }
     public Keyword getKeyword(int id) throws ObjectNotFoundException {
-        Optional<Keyword> keyword = keywordRepo.findById(id);
-        if(keyword.isEmpty())throw new ObjectNotFoundException();
-        return keyword.get();
+        return getValue(id, keywordRepo);
     }
     public Language getLanguage(int id) throws ObjectNotFoundException {
-        Optional<Language> language = languageRepo.findById(id);
-        if(language.isEmpty())throw new ObjectNotFoundException();
-        return language.get();
+        return getValue(id, languageRepo);
     }
     public LanguageRole getLanguageRole(int id) throws ObjectNotFoundException {
-        Optional<LanguageRole> languageRole = languageRoleRepo.findById(id);
-        if(languageRole.isEmpty())throw new ObjectNotFoundException();
-        return languageRole.get();
+        return getValue(id, languageRoleRepo);
     }
     public Movie getMovie(int id) throws ObjectNotFoundException {
-        Optional<Movie> movie = movieRepo.findById(id);
-        if(movie.isEmpty())throw new ObjectNotFoundException();
-        return movie.get();
+        return getValue(id, movieRepo);
     }
     public MovieCompany getMovieCompany(MovieCompanyId id) throws ObjectNotFoundException {
-        Optional<MovieCompany> movieCompany = movieCompanyRepo.findById(id);
-        if(movieCompany.isEmpty())throw new ObjectNotFoundException();
-        return movieCompany.get();
+        return getValue(id, movieCompanyRepo);
     }
     public MovieGenre getMovieGenre(MovieGenreId id) throws ObjectNotFoundException {
-        Optional<MovieGenre> movieGenre = movieGenreRepo.findById(id);
-        if(movieGenre.isEmpty())throw new ObjectNotFoundException();
-        return movieGenre.get();
+        return getValue(id, movieGenreRepo);
     }
     public MovieKeyword getMovieKeyword(MovieKeywordId id) throws ObjectNotFoundException {
-        Optional<MovieKeyword> movieKeyword = movieKeywordRepo.findById(id);
-        if(movieKeyword.isEmpty())throw new ObjectNotFoundException();
-        return movieKeyword.get();
+        return getValue(id, movieKeywordRepo);
     }
     public MovieLanguage getMovieLanguage(MovieLanguageId id) throws ObjectNotFoundException {
-        Optional<MovieLanguage> movieLanguage = movieLanguageRepo.findById(id);
-        if(movieLanguage.isEmpty())throw new ObjectNotFoundException();
-        return movieLanguage.get();
+        return getValue(id, movieLanguageRepo);
     }
     public Permission getPermission(int id) throws ObjectNotFoundException {
-        Optional<Permission> permission = permissionRepo.findById(id);
-        if(permission.isEmpty())throw new ObjectNotFoundException();
-        return permission.get();
+        return getValue(id, permissionRepo);
     }
     public Person getPerson(int id) throws ObjectNotFoundException {
-        Optional<Person> person = personRepo.findById(id);
-        if(person.isEmpty())throw new ObjectNotFoundException();
-        return person.get();
+        return getValue(id, personRepo);
     }
     public User getUser(int id) throws ObjectNotFoundException{
-        Optional<User> user = userRepo.findById(id);
-        if(user.isEmpty())throw new ObjectNotFoundException();
-        return user.get();
+        return getValue(id, userRepo);
     }
     public User login(String name, String password)throws ObjectNotFoundException{
         Optional<User> user = userRepo.findByNameAndPassword(name, password);
