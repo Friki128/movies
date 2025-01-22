@@ -25,8 +25,7 @@ public class User {
     @Column(name="user_status")
     private String status;
 
-    public User(int id, String name, String password, String email, String status) {
-        this.id = id;
+    public User(String name, String password, String email, String status) {
         this.name = name;
         this.password = password;
         this.email = email;

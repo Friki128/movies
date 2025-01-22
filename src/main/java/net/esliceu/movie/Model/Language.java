@@ -16,8 +16,7 @@ public class Language {
     @Column(name="language_name")
     private String name;
 
-    public Language(int id, String code, String name) {
-        this.id = id;
+    public Language(String code, String name) {
         this.code = code;
         this.name = name;
     }

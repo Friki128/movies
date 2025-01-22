@@ -15,8 +15,7 @@ public class Permission {
     @Column(name="permission_name")
     private String name;
 
-    public Permission(int id, String name) {
-        this.id = id;
+    public Permission(String name) {
         this.name = name;
     }
 

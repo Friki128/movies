@@ -41,8 +41,7 @@ public class Movie {
     @Column(name="vote_count")
     private int voteCount;
 
-    public Movie(int id, String title, int budget, String homepage, String overview, double popularity, Date releaseDate, long revenue, int runtime, String status, String tagline, double voteAverage, int voteCount) {
-        this.id = id;
+    public Movie(String title, int budget, String homepage, String overview, double popularity, Date releaseDate, long revenue, int runtime, String status, String tagline, double voteAverage, int voteCount) {
         this.title = title;
         this.budget = budget;
         this.homepage = homepage;

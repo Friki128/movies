@@ -16,8 +16,7 @@ public class Country {
     @Column(name="country_name")
     private String name;
 
-    public Country(int id, String isoCode, String name) {
-        this.id = id;
+    public Country(String isoCode, String name) {
         this.isoCode = isoCode;
         this.name = name;
     }

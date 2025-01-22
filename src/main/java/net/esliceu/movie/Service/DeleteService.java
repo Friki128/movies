@@ -57,63 +57,83 @@ public class DeleteService {
         repo.delete(object);
 
     }
+
     public void deletePerson(int id) throws ObjectNotFoundException {
         deleteObject(id, personRepo);
     }
+
     public void deleteCast(CastId id) throws ObjectNotFoundException {
         deleteObject(id, castRepo);
     }
+
     public void deleteAuthorization(AuthorizationId id) throws ObjectNotFoundException {
         deleteObject(id, authorizationRepo);
     }
+
     public void deleteCompany(int id) throws ObjectNotFoundException {
         deleteObject(id, companyRepo);
     }
+
     public void deleteCompanyCountry(CompanyCountryId id) throws ObjectNotFoundException {
         deleteObject(id, companyCountryRepo);
     }
+
     public void deleteCountry(int id) throws ObjectNotFoundException {
         deleteObject(id, countryRepo);
     }
+
     public void deleteCrewMember(CrewMemberId id) throws ObjectNotFoundException {
         deleteObject(id, crewMemberRepo);
     }
+
     public void deleteDepartment(int id) throws ObjectNotFoundException {
         deleteObject(id, departmentRepo);
     }
+
     public void deleteGender(int id) throws ObjectNotFoundException {
         deleteObject(id, genderRepo);
     }
+
     public void deleteGenre(int id) throws ObjectNotFoundException {
         deleteObject(id, genreRepo);
     }
+
     public void deleteKeyword(int id) throws ObjectNotFoundException {
         deleteObject(id, keywordRepo);
     }
+
     public void deleteLanguage(int id) throws ObjectNotFoundException {
         deleteObject(id, languageRepo);
     }
+
     public void deleteLanguageRole(int id) throws ObjectNotFoundException {
         deleteObject(id, languageRoleRepo);
     }
+
     public void deleteMovie(int id) throws ObjectNotFoundException {
         deleteObject(id, movieRepo);
     }
+
     public void deleteMovieCompany(MovieCompanyId id) throws ObjectNotFoundException {
         deleteObject(id, movieCompanyRepo);
     }
+
     public void deleteMovieGenre(MovieGenreId id) throws ObjectNotFoundException {
         deleteObject(id, movieGenreRepo);
     }
+
     public void deleteMovieKeyword(MovieKeywordId id) throws ObjectNotFoundException {
         deleteObject(id, movieKeywordRepo);
     }
+
     public void deleteMovieLanguage(MovieLanguageId id) throws ObjectNotFoundException {
         deleteObject(id, movieLanguageRepo);
     }
+
     public void deletePermission(int id) throws ObjectNotFoundException {
         deleteObject(id, permissionRepo);
     }
+
     public void deleteUser(int id) throws ObjectNotFoundException {
         deleteObject(id, userRepo);
     }

@@ -13,8 +13,7 @@ public class Company {
     @Column(name="company_name")
     private String name;
 
-    public Company(int id, String name) {
-        this.id = id;
+    public Company(String name) {
         this.name = name;
     }
 

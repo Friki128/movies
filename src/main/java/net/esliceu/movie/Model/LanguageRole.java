@@ -11,11 +11,10 @@ public class LanguageRole {
     private int id;
 
     @Column(name="language_role")
-    private String rol;
+    private String role;
 
-    public LanguageRole(int id, String rol) {
-        this.id = id;
-        this.rol = rol;
+    public LanguageRole(String role) {
+        this.role = role;
     }
 
     public int getId() {
@@ -26,11 +25,11 @@ public class LanguageRole {
         this.id = id;
     }
 
-    public String getRol() {
-        return rol;
+    public String getRole() {
+        return role;
     }
 
-    public void setRol(String rol) {
-        this.rol = rol;
+    public void setRole(String role) {
+        this.role = role;
     }
 }

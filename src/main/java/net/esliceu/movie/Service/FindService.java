@@ -57,66 +57,87 @@ public class FindService {
         if(value.isEmpty()) throw new ObjectNotFoundException();
         return value.get();
     }
+
     public Authorization getAuthorization(AuthorizationId id) throws ObjectNotFoundException {
         return getValue(id, authorizationRepo);
     }
+
     public Cast getCast(CastId id) throws ObjectNotFoundException {
         return getValue(id, castRepo);
     }
+
     public Company getCompany(int id) throws ObjectNotFoundException {
         return getValue(id, companyRepo);
     }
+
     public CompanyCountry getCompanyCountry(CompanyCountryId id) throws ObjectNotFoundException {
         return getValue(id, companyCountryRepo);
     }
+
     public Country getCountry(int id) throws ObjectNotFoundException {
         return getValue(id, countryRepo);
     }
+
     public CrewMember getCrewMember(CrewMemberId id) throws ObjectNotFoundException {
         return getValue(id, crewMemberRepo);
     }
+
     public Department getDepartment(int id) throws ObjectNotFoundException {
         return getValue(id, departmentRepo);
     }
+
     public Gender getGender(int id) throws ObjectNotFoundException {
         return getValue(id, genderRepo);
     }
+
     public Genre getGenre(int id) throws ObjectNotFoundException {
         return getValue(id, genreRepo);
     }
+
     public Keyword getKeyword(int id) throws ObjectNotFoundException {
         return getValue(id, keywordRepo);
     }
+
     public Language getLanguage(int id) throws ObjectNotFoundException {
         return getValue(id, languageRepo);
     }
+
     public LanguageRole getLanguageRole(int id) throws ObjectNotFoundException {
         return getValue(id, languageRoleRepo);
     }
+
     public Movie getMovie(int id) throws ObjectNotFoundException {
         return getValue(id, movieRepo);
     }
+
     public MovieCompany getMovieCompany(MovieCompanyId id) throws ObjectNotFoundException {
         return getValue(id, movieCompanyRepo);
     }
+
     public MovieGenre getMovieGenre(MovieGenreId id) throws ObjectNotFoundException {
         return getValue(id, movieGenreRepo);
     }
+
     public MovieKeyword getMovieKeyword(MovieKeywordId id) throws ObjectNotFoundException {
         return getValue(id, movieKeywordRepo);
     }
+
     public MovieLanguage getMovieLanguage(MovieLanguageId id) throws ObjectNotFoundException {
         return getValue(id, movieLanguageRepo);
     }
+
     public Permission getPermission(int id) throws ObjectNotFoundException {
         return getValue(id, permissionRepo);
     }
+
     public Person getPerson(int id) throws ObjectNotFoundException {
         return getValue(id, personRepo);
     }
+
     public User getUser(int id) throws ObjectNotFoundException{
         return getValue(id, userRepo);
     }
+
     public User login(String name, String password)throws ObjectNotFoundException{
         Optional<User> user = userRepo.findByNameAndPassword(name, password);
         if(user.isEmpty())throw new ObjectNotFoundException();

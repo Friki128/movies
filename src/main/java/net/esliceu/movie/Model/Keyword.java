@@ -13,8 +13,7 @@ public class Keyword {
     @Column(name="keyword_name")
     private String name;
 
-    public Keyword(int id, String name) {
-        this.id = id;
+    public Keyword(String name) {
         this.name = name;
     }
 
