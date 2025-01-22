@@ -3,6 +3,7 @@ package net.esliceu.movie.Service;
 import net.esliceu.movie.DAO.*;
 import net.esliceu.movie.Exceptions.ObjectNotFoundException;
 import net.esliceu.movie.Model.*;
+import net.esliceu.movie.Utils.HashUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -139,7 +140,14 @@ public class FindService {
     }
 
     public User login(String name, String password)throws ObjectNotFoundException{
-        Optional<User> user = userRepo.findByNameAndPassword(name, password);
+        String processedName = name.replace(" ", "");
+        String hashedPassword = HashUtil.hash(password);
+        Optional<User> user = userRepo.findByNameAndPassword(processedName, hashedPassword);
+        if(user.isEmpty())throw new ObjectNotFoundException();
+        return user.get();
+    }
+    public User getUserByName(String name) throws ObjectNotFoundException {
+        Optional<User> user = userRepo.findByName(name);
         if(user.isEmpty())throw new ObjectNotFoundException();
         return user.get();
     }

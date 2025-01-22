@@ -190,7 +190,7 @@ public class AddService {
         if(password.length() <= 5) throw new PasswordTooShortException();
         String hashedPassword = HashUtil.hash(password);
         try {
-            User user = findService.login(processedName, hashedPassword);
+            User user = findService.getUserByName(processedName);
             throw new UserNameInUseException();
         }catch (ObjectNotFoundException e){
             User user = new User(processedName, hashedPassword, email, status);
