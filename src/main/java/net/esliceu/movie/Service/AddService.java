@@ -1,8 +1,12 @@
 package net.esliceu.movie.Service;
 
 import net.esliceu.movie.DAO.*;
+import net.esliceu.movie.Exceptions.EmptyNameException;
 import net.esliceu.movie.Exceptions.ObjectNotFoundException;
+import net.esliceu.movie.Exceptions.PasswordTooShortException;
+import net.esliceu.movie.Exceptions.UserNameInUseException;
 import net.esliceu.movie.Model.*;
+import net.esliceu.movie.Utils.HashUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -180,8 +184,17 @@ public class AddService {
         addObject(person, personRepo);
     }
 
-    public void addUser(String name, String password, String email, String status){
-        User user = new User(name, password, email, status);
-        addObject(user, userRepo);
+    public void addUser(String name, String password, String email, String status) throws EmptyNameException, PasswordTooShortException, UserNameInUseException {
+        String processedName = name.replace(" ", "");
+        if(name.isEmpty())throw new EmptyNameException();
+        if(password.length() <= 5) throw new PasswordTooShortException();
+        String hashedPassword = HashUtil.hash(password);
+        try {
+            User user = findService.login(processedName, hashedPassword);
+            throw new UserNameInUseException();
+        }catch (ObjectNotFoundException e){
+            User user = new User(processedName, hashedPassword, email, status);
+            addObject(user, userRepo);
+        }
     }
 }
