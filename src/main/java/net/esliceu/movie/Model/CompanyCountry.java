@@ -3,7 +3,7 @@ package net.esliceu.movie.Model;
 import jakarta.persistence.*;
 
 @Entity(name="production_country")
-public class CompanyCountry {
+public class CompanyCountry implements MappableContainer{
     @EmbeddedId
     private CompanyCountryId id;
 
@@ -17,5 +17,14 @@ public class CompanyCountry {
 
     public void setId(CompanyCountryId id) {
         this.id = id;
+    }
+
+    @Override
+    public Mappable getMappable(String name) {
+        return switch (name){
+            case "movie" -> getId().getMovie();
+            case "country" -> getId().getCountry();
+            default -> null;
+        };
     }
 }

@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity(name="gender")
-public class Gender {
+public class Gender implements Mappable{
 
     @Id
     @Column(name="gender_id")

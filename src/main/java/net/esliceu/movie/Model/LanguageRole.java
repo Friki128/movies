@@ -3,7 +3,7 @@ package net.esliceu.movie.Model;
 import jakarta.persistence.*;
 
 @Entity(name="language_role")
-public class LanguageRole {
+public class LanguageRole implements Mappable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +19,11 @@ public class LanguageRole {
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public String getName() {
+        return this.role;
     }
 
     public void setId(int id) {

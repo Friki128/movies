@@ -6,7 +6,7 @@ import jdk.jfr.Enabled;
 import java.util.List;
 
 @Entity(name = "user")
-public class User {
+public class User implements Mappable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

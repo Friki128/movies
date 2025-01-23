@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity(name="authorization")
-public class Authorization {
+public class Authorization implements MappableContainer{
 
     @EmbeddedId
     private AuthorizationId id;
@@ -32,5 +32,14 @@ public class Authorization {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public Mappable getMappable(String name) {
+        return switch (name){
+            case "permission" -> getId().getPermission();
+            case "user" -> getId().getUser();
+            default -> null;
+        };
     }
 }

@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity(name="permission")
-public class Permission {
+public class Permission implements Mappable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )

@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity(name="movie")
-public class Movie {
+public class Movie implements Mappable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,6 +58,11 @@ public class Movie {
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public String getName() {
+        return this.title;
     }
 
     public void setId(int id) {

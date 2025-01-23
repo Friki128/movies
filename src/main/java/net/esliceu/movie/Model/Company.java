@@ -3,7 +3,7 @@ package net.esliceu.movie.Model;
 import jakarta.persistence.*;
 
 @Entity(name="production_company")
-public class Company {
+public class Company implements Mappable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
