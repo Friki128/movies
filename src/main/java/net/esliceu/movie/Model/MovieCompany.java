@@ -8,6 +8,8 @@ public class MovieCompany implements MappableContainer{
     @EmbeddedId
     private MovieCompanyId id;
 
+    public MovieCompany(){}
+
     public MovieCompany(MovieCompanyId id) {
         this.id = id;
     }

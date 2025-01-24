@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title th:text="${type}"></title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="/viewMovies">Movies</a>
+        <a href="/viewPersons">People</a>
+    </nav>
+    <div class="content">
+        <h1 th:id="title" th:text="${type}"></h1>
+        <div class="filters">
+            <label id="label" for="input">Name</label>
+            <input type="text" name="input" id="input">
+            <button id="btn">Search</button>
+        </div>
+    </div>
+    <div id="list" class="list"></div>
+    <div class="pageControls">
+        <a id="prev" href="#">Prev</a> <p id="pageLabel"></p><a id="next" href="#">Next</a>
+    </div>
+    <input class="hidden" type="number" name="page" id="page" value="0">
+<script src="/js/viewList.js"></script>
+</body>
+</html>

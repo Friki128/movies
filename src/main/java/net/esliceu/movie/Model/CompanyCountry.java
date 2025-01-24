@@ -7,6 +7,8 @@ public class CompanyCountry implements MappableContainer{
     @EmbeddedId
     private CompanyCountryId id;
 
+    public CompanyCountry(){}
+
     public CompanyCountry(CompanyCountryId id) {
         this.id = id;
     }

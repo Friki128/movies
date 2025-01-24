@@ -15,6 +15,8 @@ public class AuthorizationId {
     @JoinColumn(name="user_id")
     private User user;
 
+    public AuthorizationId(){}
+
     public AuthorizationId(Permission permission, User user) {
         this.permission = permission;
         this.user = user;

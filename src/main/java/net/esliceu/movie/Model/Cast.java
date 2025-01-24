@@ -14,6 +14,8 @@ public class Cast implements MappableContainer{
     @Column(name="cast_order")
     private int order;
 
+    public Cast(){}
+
     public Cast(CastId id ,String name, int order) {
         this.name = name;
         this.order = order;

@@ -17,6 +17,8 @@ public class CompanyCountryId implements Serializable {
     @JoinColumn(name="country_id")
     private Country country;
 
+    public CompanyCountryId(){}
+
     public CompanyCountryId(Movie movie, Country country) {
         this.movie = movie;
         this.country = country;

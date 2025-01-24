@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-
 @Service
 public class UpdateService {
     @Autowired
@@ -136,7 +134,7 @@ public class UpdateService {
         updateObject(id, languageRole, languageRoleRepo);
     }
 
-    public void updateMovie(int id, String title, int budget, String homepage, String overview, double popularity, Date releaseDate, long revenue, int runtime, String status, String tagline, double voteAverage, int voteCount) throws ObjectNotFoundException {
+    public void updateMovie(int id, String title, int budget, String homepage, String overview, double popularity, String releaseDate, long revenue, int runtime, String status, String tagline, double voteAverage, int voteCount) throws ObjectNotFoundException {
         Movie movie = new Movie(title, budget, homepage, overview, popularity, releaseDate, revenue, runtime, status, tagline, voteAverage, voteCount);
         movie.setId(id);
         updateObject(id, movie, movieRepo);

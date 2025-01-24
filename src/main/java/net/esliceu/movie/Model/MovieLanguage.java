@@ -8,6 +8,8 @@ public class MovieLanguage implements MappableContainer{
     @EmbeddedId
     private MovieLanguageId id;
 
+    public MovieLanguage(){}
+
     public MovieLanguage(MovieLanguageId id) {
         this.id = id;
     }

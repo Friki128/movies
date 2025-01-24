@@ -13,6 +13,8 @@ public class Person implements Mappable{
     @Column(name="person_name")
     private String name;
 
+    public Person(){}
+
     public Person(String name) {
         this.name = name;
     }

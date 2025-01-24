@@ -16,6 +16,8 @@ public class Country implements Mappable{
     @Column(name="country_name")
     private String name;
 
+    public Country(){}
+
     public Country(String isoCode, String name) {
         this.isoCode = isoCode;
         this.name = name;

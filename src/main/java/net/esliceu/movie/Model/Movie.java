@@ -2,8 +2,6 @@ package net.esliceu.movie.Model;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
-
 @Entity(name="movie")
 public class Movie implements Mappable{
 
@@ -24,7 +22,7 @@ public class Movie implements Mappable{
     private double popularity;
 
     @Column(name="release_date")
-    private Date releaseDate;
+    private String releaseDate;
 
     private long revenue;
 
@@ -41,7 +39,9 @@ public class Movie implements Mappable{
     @Column(name="vote_count")
     private int voteCount;
 
-    public Movie(String title, int budget, String homepage, String overview, double popularity, Date releaseDate, long revenue, int runtime, String status, String tagline, double voteAverage, int voteCount) {
+    public Movie(){}
+
+    public Movie(String title, int budget, String homepage, String overview, double popularity, String releaseDate, long revenue, int runtime, String status, String tagline, double voteAverage, int voteCount) {
         this.title = title;
         this.budget = budget;
         this.homepage = homepage;
@@ -109,11 +109,11 @@ public class Movie implements Mappable{
         this.popularity = popularity;
     }
 
-    public Date getReleaseDate() {
+    public String getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
 

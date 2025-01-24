@@ -22,6 +22,9 @@ public class CastId implements Serializable {
     @JoinColumn(name="gender_id")
     private Gender gender;
 
+    public CastId(){
+    }
+
     public CastId(Movie movie, Person person, Gender gender) {
         this.movie = movie;
         this.person = person;

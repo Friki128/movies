@@ -15,6 +15,8 @@ public class MovieCompanyId {
     @JoinColumn(name="company_id")
     private Company company;
 
+    public MovieCompanyId(){}
+
     public MovieCompanyId(Movie movie, Company company) {
         this.movie = movie;
         this.company = company;

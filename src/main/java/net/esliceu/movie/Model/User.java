@@ -25,6 +25,8 @@ public class User implements Mappable{
     @Column(name="user_status")
     private String status;
 
+    public User(){}
+
     public User(String name, String password, String email, String status) {
         this.name = name;
         this.password = password;

@@ -19,6 +19,8 @@ public class MovieLanguageId {
     @JoinColumn(name="language_role_id")
     private LanguageRole languageRole;
 
+    public MovieLanguageId(){}
+
     public MovieLanguageId(Movie movie, Language language, LanguageRole languageRole) {
         this.movie = movie;
         this.language = language;

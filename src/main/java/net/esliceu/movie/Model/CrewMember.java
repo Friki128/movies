@@ -10,6 +10,8 @@ public class CrewMember implements MappableContainer{
 
     private String job;
 
+    public CrewMember(){}
+
     public CrewMember(CrewMemberId id, String job) {
         this.id = id;
         this.job = job;

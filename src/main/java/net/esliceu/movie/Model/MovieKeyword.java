@@ -8,6 +8,8 @@ public class MovieKeyword implements MappableContainer{
     @EmbeddedId
     private MovieKeywordId id;
 
+    public MovieKeyword(){}
+
     public MovieKeyword(MovieKeywordId id) {
         this.id = id;
     }

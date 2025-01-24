@@ -15,6 +15,8 @@ public class MovieKeywordId {
     @JoinColumn(name="keyword_id")
     private Keyword keyword;
 
+    public MovieKeywordId(){}
+
     public MovieKeywordId(Movie movie, Keyword keyword) {
         this.movie = movie;
         this.keyword = keyword;

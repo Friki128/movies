@@ -13,6 +13,8 @@ public class Keyword implements Mappable{
     @Column(name="keyword_name")
     private String name;
 
+    public Keyword(){}
+
     public Keyword(String name) {
         this.name = name;
     }

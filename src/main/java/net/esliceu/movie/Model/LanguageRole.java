@@ -13,6 +13,8 @@ public class LanguageRole implements Mappable{
     @Column(name="language_role")
     private String role;
 
+    public LanguageRole(){}
+
     public LanguageRole(String role) {
         this.role = role;
     }

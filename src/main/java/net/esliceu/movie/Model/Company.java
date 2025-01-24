@@ -13,6 +13,8 @@ public class Company implements Mappable{
     @Column(name="company_name")
     private String name;
 
+    public Company(){}
+
     public Company(String name) {
         this.name = name;
     }

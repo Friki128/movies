@@ -13,6 +13,8 @@ public class Authorization implements MappableContainer{
     @Column(name="authorization_status")
     private String status;
 
+    public Authorization(){}
+
     public Authorization(AuthorizationId id, String status) {
         this.id = id;
         this.status = status;

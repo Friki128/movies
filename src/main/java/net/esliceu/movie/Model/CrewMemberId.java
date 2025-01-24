@@ -19,6 +19,8 @@ public class CrewMemberId {
     @JoinColumn(name="person_id")
     private Person person;
 
+    public CrewMemberId(){}
+
     public CrewMemberId(Department department, Movie movie, Person person) {
         this.department = department;
         this.movie = movie;

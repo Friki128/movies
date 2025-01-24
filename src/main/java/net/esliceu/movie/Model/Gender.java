@@ -14,6 +14,8 @@ public class Gender implements Mappable{
     @Column(name="gender")
     private String name;
 
+    public Gender(){}
+
     public Gender(int id, String name) {
         this.id = id;
         this.name = name;

@@ -15,6 +15,8 @@ public class MovieGenreId {
     @JoinColumn(name="genre_id")
     private Genre genre;
 
+    public MovieGenreId(){}
+
     public MovieGenreId(Movie movie, Genre genre) {
         this.movie = movie;
         this.genre = genre;

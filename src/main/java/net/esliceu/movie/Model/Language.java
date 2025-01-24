@@ -16,6 +16,8 @@ public class Language implements Mappable{
     @Column(name="language_name")
     private String name;
 
+    public Language(){}
+
     public Language(String code, String name) {
         this.code = code;
         this.name = name;

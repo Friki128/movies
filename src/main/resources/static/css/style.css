@@ -1,0 +1,78 @@
+*{
+    --color1: #F3EFE0;
+    --color2: #000000;
+    --color3: #7FEFBD;
+    --color4: #CBA135;
+}
+ html{
+    width: 100%;
+    background-color: var(--color2);
+ }
+
+h1{
+    color: var(--color4);
+}
+
+p{
+    font-weight: bolder;
+    color: var(--color3);
+}
+
+label{
+    font-weight: bolder;
+    color: var(--color3);
+}
+
+a{
+    text-decoration: none;
+    color: var(--color4);
+}
+
+.ui-helper-hidden-accessible{
+    visibility: hidden;
+}
+
+.hidden{
+    visibility: hidden;
+}
+
+.list{
+display: flex;
+flex-direction: column;
+width: 50%;
+align-items: center;
+margin: 0 auto;
+}
+
+.list a{
+    margin-top: 10px;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    width: 100%;
+}
+
+.pageControls{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.pageControls p{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.ui-menu{
+    color: var(--color4);
+    background-color: var(--color2);
+    max-height: 100px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
