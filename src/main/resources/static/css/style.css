@@ -76,3 +76,8 @@ margin: 0 auto;
     overflow-y: auto;
     overflow-x: hidden;
 }
+
+.button:hover{
+    background-color: var(--color4);
+    color: var(--color2);
+}
