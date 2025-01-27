@@ -7,7 +7,7 @@ import jakarta.persistence.ManyToOne;
 import java.io.Serializable;
 
 @Embeddable
-public class CompanyCountryId implements Serializable {
+public class ProductionCountryId implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="movie_id")
@@ -17,9 +17,9 @@ public class CompanyCountryId implements Serializable {
     @JoinColumn(name="country_id")
     private Country country;
 
-    public CompanyCountryId(){}
+    public ProductionCountryId(){}
 
-    public CompanyCountryId(Movie movie, Country country) {
+    public ProductionCountryId(Movie movie, Country country) {
         this.movie = movie;
         this.country = country;
     }

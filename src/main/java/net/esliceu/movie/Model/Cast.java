@@ -59,4 +59,13 @@ public class Cast implements MappableContainer, Mappable{
             default -> null;
         };
     }
+
+    @Override
+    public String print(String exclude) {
+        return switch (exclude){
+            case "person" -> this.getName() + " in " + this.getCastId().getMovie().getTitle() + ". Gender: " + this.getCastId().getGender().getName();
+            case "movie" -> this.getCastId().getPerson().getName() + " As " + this.getName() + ". Gender: " + this.getCastId().getGender().getName();
+            default -> this.getCastId().getPerson().getName() + " As " + this.getName() + " in " + this.getCastId().getMovie().getTitle();
+        };
+    }
 }

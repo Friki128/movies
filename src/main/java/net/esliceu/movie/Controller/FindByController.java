@@ -4,7 +4,7 @@ import jakarta.servlet.http.HttpSession;
 import net.esliceu.movie.Model.*;
 import net.esliceu.movie.Service.FindAllService;
 import net.esliceu.movie.Utils.JQueryElement;
-import net.esliceu.movie.Utils.JQueryUtil;
+import net.esliceu.movie.Utils.DTOUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -32,13 +32,13 @@ public class FindByController {
     @GetMapping("/findAllMovies")
     public ResponseEntity<List<String>> Movies(){
         List<Movie> movies = findByService.getAllMovies();
-        List<String> result = JQueryUtil.mapStrings(movies);
+        List<String> result = DTOUtil.mapStrings(movies);
         return ResponseEntity.ok(result);
     }
     @GetMapping("/findAllActors")
     public ResponseEntity<List<JQueryElement>> Actors(){
         List<Person> actors = findByService.getAllActors();
-        List<JQueryElement> result = JQueryUtil.map(actors);
+        List<JQueryElement> result = DTOUtil.map(actors);
         return ResponseEntity.ok(result);
     }
 
@@ -69,21 +69,21 @@ public class FindByController {
     @GetMapping("/findAllDirectors")
     public ResponseEntity<List<JQueryElement>> Directors(){
         List<Person> directors = findByService.getAllDirectors();
-        List<JQueryElement> result = JQueryUtil.map(directors);
+        List<JQueryElement> result = DTOUtil.map(directors);
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("/findAllCharacters")
     public ResponseEntity<List<String>> Characters(){
         List<Cast> characters = findByService.getAllCharacters();
-        List<String> result = JQueryUtil.mapStrings(characters);
+        List<String> result = DTOUtil.mapStrings(characters);
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("/findAllPersons")
     public ResponseEntity<List<String>> Persons(){
         List<Person> persons = findByService.getAllPersons();
-        List<String> result = JQueryUtil.mapStrings(persons);
+        List<String> result = DTOUtil.mapStrings(persons);
         return ResponseEntity.ok(result);
     }
     @GetMapping("/findPersons")
@@ -100,7 +100,7 @@ public class FindByController {
     @GetMapping("/findAllUsers")
     public ResponseEntity<List<String>> Users(){
         List<User> users = findByService.getAllUsers();
-        List<String> result = JQueryUtil.mapStrings(users);
+        List<String> result = DTOUtil.mapStrings(users);
         return ResponseEntity.ok(result);
     }
     @GetMapping("/findUsers")
@@ -117,7 +117,7 @@ public class FindByController {
     @GetMapping("/findAllPermissions")
     public ResponseEntity<List<String>> Permissions(){
         List<Permission> permissions = findByService.getAllPermissions();
-        List<String> result = JQueryUtil.mapStrings(permissions);
+        List<String> result = DTOUtil.mapStrings(permissions);
         return ResponseEntity.ok(result);
     }
     @GetMapping("/findPermissions")
@@ -134,7 +134,7 @@ public class FindByController {
     @GetMapping("/findAllLanguages")
     public ResponseEntity<List<String>> Languages(){
         List<Language> languages = findByService.getAllLanguages();
-        List<String> result = JQueryUtil.mapStrings(languages);
+        List<String> result = DTOUtil.mapStrings(languages);
         return ResponseEntity.ok(result);
     }
     @GetMapping("/findLanguages")
@@ -151,7 +151,7 @@ public class FindByController {
     @GetMapping("/findAllLanguageRoles")
     public ResponseEntity<List<String>> LanguageRoles(){
         List<LanguageRole> languageRoles = findByService.getAllLanguageRoles();
-        List<String> result = JQueryUtil.mapStrings(languageRoles);
+        List<String> result = DTOUtil.mapStrings(languageRoles);
         return ResponseEntity.ok(result);
     }
     @GetMapping("/findLanguageRoles")
@@ -168,7 +168,7 @@ public class FindByController {
     @GetMapping("/findAllCountrys")
     public ResponseEntity<List<String>> Countries(){
         List<Country> countries = findByService.getAllCountries();
-        List<String> result = JQueryUtil.mapStrings(countries);
+        List<String> result = DTOUtil.mapStrings(countries);
         return ResponseEntity.ok(result);
     }
     @GetMapping("/findCountrys")
@@ -185,7 +185,7 @@ public class FindByController {
     @GetMapping("/findAllCompanys")
     public ResponseEntity<List<String>> Companies(){
         List<Company> companies = findByService.getAllCompanies();
-        List<String> result = JQueryUtil.mapStrings(companies);
+        List<String> result = DTOUtil.mapStrings(companies);
         return ResponseEntity.ok(result);
     }
     @GetMapping("/findCompanys")
@@ -202,7 +202,7 @@ public class FindByController {
     @GetMapping("/findAllKeywords")
     public ResponseEntity<List<String>> Keywords(){
         List<Keyword> keywords = findByService.getAllKeywords();
-        List<String> result = JQueryUtil.mapStrings(keywords);
+        List<String> result = DTOUtil.mapStrings(keywords);
         return ResponseEntity.ok(result);
     }
     @GetMapping("/findKeywords")
@@ -219,7 +219,7 @@ public class FindByController {
     @GetMapping("/findAllGenders")
     public ResponseEntity<List<String>> Genders(){
         List<Gender> genders = findByService.getAllGenders();
-        List<String> result = JQueryUtil.mapStrings(genders);
+        List<String> result = DTOUtil.mapStrings(genders);
         return ResponseEntity.ok(result);
     }
     @GetMapping("/findGenders")
@@ -236,7 +236,7 @@ public class FindByController {
     @GetMapping("/findAllGenres")
     public ResponseEntity<List<JQueryElement>> Genres(){
         List<Genre> genres = findByService.getAllGenres();
-        List<JQueryElement> result = JQueryUtil.map(genres);
+        List<JQueryElement> result = DTOUtil.map(genres);
         return ResponseEntity.ok(result);
     }
     @GetMapping("/findGenres")
@@ -253,7 +253,7 @@ public class FindByController {
     @GetMapping("/findAllDepartments")
     public ResponseEntity<List<String>> Departments(){
         List<Department> departments = findByService.getAllDepartments();
-        List<String> result = JQueryUtil.mapStrings(departments);
+        List<String> result = DTOUtil.mapStrings(departments);
         return ResponseEntity.ok(result);
     }
     @GetMapping("/findDepartments")

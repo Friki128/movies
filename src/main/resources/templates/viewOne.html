@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title th:text="${title}"></title>
+</head>
+<body>
+    <div class="content">
+        <h1 th:text="${title}"></h1>
+        <div class="values">
+            <div th:each="item : ${list}" th:switch="${item.type}">
+                <div th:case="para">
+                    <label th:for="${item.name}" th:text="${item.name}"></label>
+                    <p th:id="${item.name}" th:text="${item.value}"></p>
+                </div>
+                <div th:case="text">
+                    <label th:for="${item.name}" th:text="${item.name}"></label>
+                    <textarea name="${item.name}" disabled id="${item.name}" th:text="${item.value}"></textarea>
+                </div>
+                <div th:case="list">
+                    <h2 th:text="${item.name}"></h2>
+                    <div class="overflowList">
+                        <p th:each="element : ${item.value}" th:text="${element}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

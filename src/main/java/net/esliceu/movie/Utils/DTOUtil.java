@@ -6,7 +6,7 @@ import net.esliceu.movie.Model.MappableContainer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JQueryUtil {
+public class DTOUtil {
     public static List<JQueryElement> map(List<? extends Mappable> values){
         List<JQueryElement> result = new ArrayList<>();
         for(Mappable value : values){
@@ -25,6 +25,20 @@ public class JQueryUtil {
         List<String> result = new ArrayList<>();
         for(Mappable value : values){
             result.add(value.getName());
+        }
+        return result;
+    }
+    public static List<String> mapContainerStrings(List<? extends MappableContainer> values, String name){
+        List<Mappable> result = new ArrayList<>();
+        for(MappableContainer value : values){
+            result.add(value.getMappable(name));
+        }
+        return mapStrings(result);
+    }
+    public static List<String> printContainers(List<? extends MappableContainer> values, String exclude){
+        List<String> result = new ArrayList<>();
+        for(MappableContainer value : values){
+            result.add(value.print(exclude));
         }
         return result;
     }

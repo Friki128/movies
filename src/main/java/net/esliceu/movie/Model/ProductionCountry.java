@@ -2,31 +2,30 @@ package net.esliceu.movie.Model;
 
 import jakarta.persistence.*;
 
-@Entity(name="movie_genres")
-public class MovieGenre implements MappableContainer{
-
+@Entity(name="production_country")
+public class ProductionCountry implements MappableContainer{
     @EmbeddedId
-    private MovieGenreId id;
+    private ProductionCountryId id;
 
-    public MovieGenre(){}
+    public ProductionCountry(){}
 
-    public MovieGenre(MovieGenreId id) {
+    public ProductionCountry(ProductionCountryId id) {
         this.id = id;
     }
 
-    public MovieGenreId getId() {
+    public ProductionCountryId getId() {
         return id;
     }
 
-    public void setId(MovieGenreId id) {
+    public void setId(ProductionCountryId id) {
         this.id = id;
     }
 
     @Override
     public Mappable getMappable(String name) {
         return switch (name){
-            case "genre" -> getId().getGenre();
             case "movie" -> getId().getMovie();
+            case "country" -> getId().getCountry();
             default -> null;
         };
     }
@@ -34,9 +33,8 @@ public class MovieGenre implements MappableContainer{
     @Override
     public String print(String exclude) {
         return switch (exclude){
-            case "movie" -> getId().getGenre().getName();
+            case "movie" -> getId().getCountry().getName();
             default -> getId().getMovie().getName();
         };
     }
-
 }

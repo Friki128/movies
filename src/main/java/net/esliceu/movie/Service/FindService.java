@@ -21,7 +21,7 @@ public class FindService {
     @Autowired
     private CompanyRepo companyRepo;
     @Autowired
-    private CompanyCountryRepo companyCountryRepo;
+    private ProductionCountryRepo productionCountryRepo;
     @Autowired
     private CountryRepo countryRepo;
     @Autowired
@@ -71,8 +71,8 @@ public class FindService {
         return getValue(id, companyRepo);
     }
 
-    public CompanyCountry getCompanyCountry(CompanyCountryId id) throws ObjectNotFoundException {
-        return getValue(id, companyCountryRepo);
+    public ProductionCountry getCompanyCountry(ProductionCountryId id) throws ObjectNotFoundException {
+        return getValue(id, productionCountryRepo);
     }
 
     public Country getCountry(int id) throws ObjectNotFoundException {

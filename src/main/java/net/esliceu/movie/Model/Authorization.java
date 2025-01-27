@@ -44,4 +44,9 @@ public class Authorization implements MappableContainer{
             default -> null;
         };
     }
+
+    @Override
+    public String print(String exclude) {
+        return "";
+    }
 }

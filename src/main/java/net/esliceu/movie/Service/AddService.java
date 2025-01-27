@@ -22,7 +22,7 @@ public class AddService {
     @Autowired
     private CompanyRepo companyRepo;
     @Autowired
-    private CompanyCountryRepo companyCountryRepo;
+    private ProductionCountryRepo productionCountryRepo;
     @Autowired
     private CountryRepo countryRepo;
     @Autowired
@@ -82,12 +82,12 @@ public class AddService {
         addObject(company, companyRepo);
     }
 
-    public void addCompanyCountry(int movieId, int countryId) throws ObjectNotFoundException {
+    public void addProductionCountry(int movieId, int countryId) throws ObjectNotFoundException {
         Movie movie = findService.getMovie(movieId);
         Country country = findService.getCountry(countryId);
-        CompanyCountryId id = new CompanyCountryId(movie, country);
-        CompanyCountry companyCountry = new CompanyCountry(id);
-        addObject(companyCountry, companyCountryRepo);
+        ProductionCountryId id = new ProductionCountryId(movie, country);
+        ProductionCountry productionCountry = new ProductionCountry(id);
+        addObject(productionCountry, productionCountryRepo);
     }
 
     public void addCountry(String isoCode, String name){

@@ -22,7 +22,7 @@ public class UpdateService {
     @Autowired
     private CompanyRepo companyRepo;
     @Autowired
-    private CompanyCountryRepo companyCountryRepo;
+    private ProductionCountryRepo productionCountryRepo;
     @Autowired
     private CountryRepo countryRepo;
     @Autowired

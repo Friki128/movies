@@ -30,4 +30,12 @@ public class MovieKeyword implements MappableContainer{
             default -> null;
         };
     }
+
+    @Override
+    public String print(String exclude) {
+        return switch (exclude){
+            case "movie" -> getId().getKeyword().getName();
+            default -> getId().getMovie().getName();
+        };
+    }
 }

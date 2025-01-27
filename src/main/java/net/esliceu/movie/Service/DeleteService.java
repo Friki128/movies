@@ -18,7 +18,7 @@ public class DeleteService {
     @Autowired
     private CompanyRepo companyRepo;
     @Autowired
-    private CompanyCountryRepo companyCountryRepo;
+    private ProductionCountryRepo productionCountryRepo;
     @Autowired
     private CountryRepo countryRepo;
     @Autowired
@@ -74,8 +74,8 @@ public class DeleteService {
         deleteObject(id, companyRepo);
     }
 
-    public void deleteCompanyCountry(CompanyCountryId id) throws ObjectNotFoundException {
-        deleteObject(id, companyCountryRepo);
+    public void deleteCompanyCountry(ProductionCountryId id) throws ObjectNotFoundException {
+        deleteObject(id, productionCountryRepo);
     }
 
     public void deleteCountry(int id) throws ObjectNotFoundException {

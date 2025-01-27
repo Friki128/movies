@@ -42,4 +42,15 @@ public class CrewMember implements MappableContainer{
             default -> null;
         };
     }
+
+    @Override
+    public String print(String exclude) {
+        return switch (exclude) {
+            case "person" ->
+                    this.getJob() + " as " + this.getId().getDepartment().getName() + " at " + this.getId().getMovie().getName();
+            case "movie" ->
+                    this.getId().getPerson().getName() + " as " + this.getJob() + " at " + this.getId().getDepartment().getName();
+            default -> this.getId().getPerson().getName() + " in " + this.getId().getMovie().getTitle();
+        };
+    }
 }
