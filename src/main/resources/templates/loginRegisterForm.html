@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title th:text="${title}"></title>
+</head>
+<body>
+    <div class="content">
+        <h1 th:text="${title}"></h1>
+        <form class="form" action="#" method="post">
+            <label class="inputLabel" for="name">Name</label>
+            <input type="text" name="name" id="name">
+            <label class="inputLabel" for="password">Password</label>
+            <input type="password" name="password" id="password">
+            <label class="inputLabel" for="email" th:if="${title == 'register'}">Email</label>
+            <input type="email" name="email" id="email" th:if="${title == 'register'}">
+            <input class="button" type="submit" th:value="${title}">
+        </form>
+        <a href="/login" class="button" th:if="${title == 'register'}">Already have an account?</a>
+        <a href="/register" class="button" th:if="${title == 'login'}">Create an account</a>
+        <p class="error" th:text="${error}"></p>
+    </div>
+    
+</body>
+</html>

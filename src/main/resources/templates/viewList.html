@@ -9,10 +9,17 @@
 <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
 </head>
 <body>
-    <nav>
-        <a class="button" href="/viewMovies">Movies</a>
-        <a class="button" href="/viewPersons">People</a>
-    </nav>
+    <div class="nav">
+        <nav class="start">
+            <a class="button" href="/viewMovies">Movies</a>
+            <a class="button" href="/viewPersons">People</a>
+        </nav>
+        <nav class="end">
+            <a class="button" href="/login" th:if="${logged == false}">Login</a>
+            <a class="button" href="/viewProfile" th:unless="${logged == false}">User Profile</a>
+        </nav>
+    </div>
+    
     <div class="content">
         <h1 th:id="title" th:text="${type}"></h1>
         <div class="filters">

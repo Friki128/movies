@@ -12,14 +12,15 @@ public class Interceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler) throws Exception {
         String uri = req.getRequestURI();
         User user = (User) req.getSession().getAttribute("user");
-        if (uri.endsWith(".css") || uri.endsWith(".js") || uri.endsWith(".webp") || uri.endsWith(".gif")) {
+        if (uri.endsWith(".css") || uri.endsWith(".js") || uri.endsWith(".webp") || uri.endsWith(".gif")||uri.contains("find")||uri.contains("view")||uri.contains("register")||uri.contains("login")) {
             return true;
         }
-        if((!uri.contains("view")&&!(uri.contains("login") || uri.contains("register"))) && user == null) {
+        if(user == null) {
             resp.sendRedirect("/");
+            return false;
         }
         if(uri.contains("admin")) {
-            if (user != null && !user.getStatus().equals("admin")) {
+            if (!user.getStatus().equals("admin")) {
                 resp.sendRedirect("/");
             }
         }

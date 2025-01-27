@@ -11,6 +11,7 @@
 
 h1{
     color: var(--color4);
+    text-transform: capitalize;
 }
 
 p{
@@ -80,4 +81,69 @@ margin: 0 auto;
 .button:hover{
     background-color: var(--color4);
     color: var(--color2);
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form *{
+    margin: 10px;
+}
+
+.button{
+    background-color: var(--color2);
+    border: 1px solid var(--color3);
+    color: var(--color3);
+    padding: 2px;
+    border-radius: 5px;
+    text-transform: capitalize;
+    padding: 2px;
+}
+
+.form .button{
+    width: 50%;
+}
+
+.button:hover{
+    background-color: var(--color3);
+    color: var(--color4);
+    border: 1px solid var(--color4);
+}
+
+.inputLabel{
+    text-align: center;
+}
+
+.error{
+    color: red;
+}
+
+.nav *{
+    width: 50%;
+}
+
+.start{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.end{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.start *{
+    width: fit-content;
+}
+
+.end *{
+    width: fit-content;
+}
+
+.nav{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
 }
