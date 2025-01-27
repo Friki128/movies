@@ -3,12 +3,12 @@ package net.esliceu.movie.Controller;
 import jakarta.servlet.http.HttpSession;
 import net.esliceu.movie.Model.*;
 import net.esliceu.movie.Service.FindAllService;
+import net.esliceu.movie.Utils.JQueryElement;
 import net.esliceu.movie.Utils.JQueryUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -33,6 +33,50 @@ public class FindByController {
     public ResponseEntity<List<String>> Movies(){
         List<Movie> movies = findByService.getAllMovies();
         List<String> result = JQueryUtil.mapStrings(movies);
+        return ResponseEntity.ok(result);
+    }
+    @GetMapping("/findAllActors")
+    public ResponseEntity<List<JQueryElement>> Actors(){
+        List<Person> actors = findByService.getAllActors();
+        List<JQueryElement> result = JQueryUtil.map(actors);
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/findMoviesByActor")
+    public ResponseEntity<Page<Movie>> MoviesByActor(int actor, int page){
+        Page<Movie> movies = findByService.getMoviesByActor(actor, page);
+        return ResponseEntity.ok(movies);
+    }
+
+    @GetMapping("/findMoviesByCharacter")
+    public ResponseEntity<Page<Movie>> MoviesByCharacter(String character, int page){
+        Page<Movie> movies = findByService.getMoviesByCharacter(character, page);
+        return ResponseEntity.ok(movies);
+    }
+
+    @GetMapping("/findMoviesByDirector")
+    public ResponseEntity<Page<Movie>> MoviesByDirector(int director, int page){
+        Page<Movie> movies = findByService.getMoviesByDirector(director, page);
+        return ResponseEntity.ok(movies);
+    }
+
+    @GetMapping("/findMoviesByGenre")
+    public ResponseEntity<Page<Movie>> MoviesByGenre(int genre, int page){
+        Page<Movie> movies = findByService.getMoviesByGenre(genre, page);
+        return ResponseEntity.ok(movies);
+    }
+
+    @GetMapping("/findAllDirectors")
+    public ResponseEntity<List<JQueryElement>> Directors(){
+        List<Person> directors = findByService.getAllDirectors();
+        List<JQueryElement> result = JQueryUtil.map(directors);
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/findAllCharacters")
+    public ResponseEntity<List<String>> Characters(){
+        List<Cast> characters = findByService.getAllCharacters();
+        List<String> result = JQueryUtil.mapStrings(characters);
         return ResponseEntity.ok(result);
     }
 
@@ -190,9 +234,9 @@ public class FindByController {
     }
 
     @GetMapping("/findAllGenres")
-    public ResponseEntity<List<String>> Genres(){
+    public ResponseEntity<List<JQueryElement>> Genres(){
         List<Genre> genres = findByService.getAllGenres();
-        List<String> result = JQueryUtil.mapStrings(genres);
+        List<JQueryElement> result = JQueryUtil.map(genres);
         return ResponseEntity.ok(result);
     }
     @GetMapping("/findGenres")

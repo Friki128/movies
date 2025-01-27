@@ -213,4 +213,36 @@ public class FindAllService {
         Pageable pageable = PageRequest.of(page, 10);
         return countryRepo.findAllByNameContainsIgnoreCase(name, pageable);
     }
+
+    public List<Cast> getAllCharacters() {
+        return castRepo.findAll();
+    }
+
+    public List<Person> getAllActors() {
+        return personRepo.findAllActors();
+    }
+
+    public List<Person> getAllDirectors() {
+        return personRepo.findAllDirectors();
+    }
+
+    public Page<Movie> getMoviesByActor(int actor, int page) {
+        Pageable pageable = PageRequest.of(page, 10);
+        return movieRepo.findAllMoviesByActor(actor, pageable);
+    }
+
+    public Page<Movie> getMoviesByCharacter(String character, int page) {
+        Pageable pageable = PageRequest.of(page, 10);
+        return movieRepo.findAllMoviesByCharacter(character, pageable);
+    }
+
+    public Page<Movie> getMoviesByDirector(int director, int page) {
+        Pageable pageable = PageRequest.of(page, 10);
+        return movieRepo.findAllMoviesByDirector(director, pageable);
+    }
+
+    public Page<Movie> getMoviesByGenre(int genre, int page) {
+        Pageable pageable = PageRequest.of(page, 10);
+        return movieRepo.findAllMoviesByGenre(genre, pageable);
+    }
 }

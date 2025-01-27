@@ -16,6 +16,13 @@
     <div class="content">
         <h1 th:id="title" th:text="${type}"></h1>
         <div class="filters">
+            <select th:if="${type == 'Movies'}" name="select" id="select">
+                <option value="Movies" selected>Name</option>
+                <option value="Actors">Actor</option>
+                <option value="Characters">Character</option>
+                <option value="Directors">Director</option>
+                <option value="Genres">Genre</option>
+            </select>
             <label id="label" for="input">Name</label>
             <input type="text" name="input" id="input">
             <button id="btn">Search</button>
