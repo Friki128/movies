@@ -96,4 +96,10 @@ public class ViewListController {
         model.addAttribute("type", "Departments");
         return "viewList";
     }
+    @GetMapping("/viewAdminRoles")
+    public String viewAdminRoles(Model model){
+        SetStatusAndPermissions(model, "AdminRole");
+        model.addAttribute("type", "AdminRoles");
+        return "viewList";
+    }
 }

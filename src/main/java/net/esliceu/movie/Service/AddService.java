@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import javax.management.relation.Role;
+
 @Service
 public class AddService {
     @Autowired
@@ -52,6 +54,10 @@ public class AddService {
     @Autowired
     private PermissionRepo permissionRepo;
     @Autowired
+    private AdminRoleRepo adminRoleRepo;
+    @Autowired
+    private RolePermissionRepo rolePermissionRepo;
+    @Autowired
     private UserRepo userRepo;
     @Autowired
     private FindService findService;
@@ -60,12 +66,20 @@ public class AddService {
         repo.save(object);
     }
 
-    public void addAuthorization(int permissionId, int userId, String status) throws ObjectNotFoundException {
-        Permission permission = findService.getPermission(permissionId);
+    public void addAuthorization(int adminRoleId, int userId, String status) throws ObjectNotFoundException {
+        AdminRole adminRole = findService.getAdminRole(adminRoleId);
         User user = findService.getUser(userId);
-        AuthorizationId id = new AuthorizationId(permission, user);
+        AuthorizationId id = new AuthorizationId(adminRole, user);
         Authorization authorization = new Authorization(id, status);
         addObject(authorization, authorizationRepo);
+    }
+
+    public void addRolePermission(int adminRoleId, int permissionId) throws ObjectNotFoundException {
+        AdminRole adminRole = findService.getAdminRole(adminRoleId);
+        Permission permission = findService.getPermission(permissionId);
+        RolePermissionId id = new RolePermissionId(adminRole, permission);
+        RolePermission rolePermission = new RolePermission(id);
+        addObject(rolePermission, rolePermissionRepo);
     }
 
     public void addCast(int movieId, int personId, int genderId, String name, int order) throws ObjectNotFoundException {
@@ -80,6 +94,11 @@ public class AddService {
     public void addCompany(String name){
         Company company = new Company(name);
         addObject(company, companyRepo);
+    }
+
+    public void addAdminRole(String name){
+        AdminRole adminRole = new AdminRole(name);
+        addObject(adminRole, adminRoleRepo);
     }
 
     public void addProductionCountry(int movieId, int countryId) throws ObjectNotFoundException {

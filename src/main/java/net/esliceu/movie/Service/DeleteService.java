@@ -44,9 +44,13 @@ public class DeleteService {
     @Autowired
     private MovieKeywordRepo movieKeywordRepo;
     @Autowired
+    private AdminRoleRepo adminRoleRepo;
+    @Autowired
     private MovieLanguageRepo movieLanguageRepo;
     @Autowired
     private PermissionRepo permissionRepo;
+    @Autowired
+    private RolePermissionRepo rolePermissionRepo;
     @Autowired
     private UserRepo userRepo;
     @Autowired
@@ -71,6 +75,10 @@ public class DeleteService {
         deleteObject(authorization, authorizationRepo);
     }
 
+    public void deleteRolePermission(RolePermission rolePermission) throws ObjectNotFoundException {
+        deleteObject(rolePermission, rolePermissionRepo);
+    }
+
     public void deleteCompany(Company company) throws ObjectNotFoundException {
         movieCompanyRepo.deleteAllByIdCompany(company);
         deleteObject(company, companyRepo);
@@ -84,6 +92,12 @@ public class DeleteService {
         productionCountryRepo.deleteAllByIdCountry(country);
         deleteObject(country, countryRepo);
     }
+    public void deleteAdminRole(AdminRole adminRole) throws ObjectNotFoundException {
+        rolePermissionRepo.deleteAllByIdAdminRole(adminRole);
+        authorizationRepo.deleteAllByIdAdminRole(adminRole);
+        deleteObject(adminRole, adminRoleRepo);
+    }
+
 
     public void deleteCrewMember(CrewMember crewMember) throws ObjectNotFoundException {
         deleteObject(crewMember, crewMemberRepo);
@@ -147,7 +161,7 @@ public class DeleteService {
     }
 
     public void deletePermission(Permission permission) throws ObjectNotFoundException {
-        authorizationRepo.deleteAllByIdPermission(permission);
+        rolePermissionRepo.deleteAllByIdPermission(permission);
         deleteObject(permission, permissionRepo);
     }
 

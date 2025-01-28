@@ -338,6 +338,33 @@ public class UpdateController {
         return "redirect:/errorDisplay";
     }
 
+    @GetMapping("/updateAdminRole")
+    public String updateGetAdminRole(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        try {
+            AdminRole adminRole = findService.getAdminRole(id);
+            List<ViewTableList> list = new ArrayList<>();
+            list.add(new ViewTableList("id", "inputId", adminRole.getId()));
+            list.add(new ViewTableList("name", "inputText", adminRole.getName()));
+            model.addAttribute("type", "update");
+            model.addAttribute("title", "AdminRole");
+            model.addAttribute("list", list);
+            return "viewOne";
+        } catch (ObjectNotFoundException e) {
+            redirectAttributes.addAttribute("error", "AdminRole Not Found");
+        }
+        return "redirect:/errorDisplay";
+    }
+    @PostMapping("/updateAdminRole")
+    public String updatePostAdminRole(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam String name){
+        try {
+            updateService.updateAdminRole(id, name);
+            return "redirect:/viewAdminRoles";
+        } catch (ObjectNotFoundException e) {
+            redirectAttributes.addAttribute("error", "AdminRole Not Found");
+        }
+        return "redirect:/errorDisplay";
+    }
+
     @GetMapping("/updateMovie")
     public String updateGetMovie(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
         try {

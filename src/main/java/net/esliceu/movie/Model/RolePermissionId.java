@@ -5,21 +5,19 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Embeddable
-public class AuthorizationId {
-
+public class RolePermissionId {
     @ManyToOne
     @JoinColumn(name="role_id")
     private AdminRole adminRole;
-
     @ManyToOne
-    @JoinColumn(name="user_id")
-    private User user;
+    @JoinColumn(name="permission_id")
+    private Permission permission;
 
-    public AuthorizationId(){}
+    public RolePermissionId(){}
 
-    public AuthorizationId(AdminRole adminRole, User user) {
+    public RolePermissionId(AdminRole adminRole, Permission permission) {
         this.adminRole = adminRole;
-        this.user = user;
+        this.permission = permission;
     }
 
     public AdminRole getAdminRole() {
@@ -30,11 +28,11 @@ public class AuthorizationId {
         this.adminRole = adminRole;
     }
 
-    public User getUser() {
-        return user;
+    public Permission getPermission() {
+        return permission;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setPermission(Permission permission) {
+        this.permission = permission;
     }
 }

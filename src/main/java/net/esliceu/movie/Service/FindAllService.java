@@ -50,7 +50,11 @@ public class FindAllService {
     @Autowired
     private MovieLanguageRepo movieLanguageRepo;
     @Autowired
+    private AdminRoleRepo adminRoleRepo;
+    @Autowired
     private PermissionRepo permissionRepo;
+    @Autowired
+    private RolePermissionRepo rolePermissionRepo;
     @Autowired
     private UserRepo userRepo;
     @Autowired
@@ -217,6 +221,20 @@ public class FindAllService {
         return countryRepo.findAllByNameContainsIgnoreCase(name, pageable);
     }
 
+    public List<AdminRole> getAllAdminRoles(){
+        return adminRoleRepo.findAll();
+    }
+
+    public Page<AdminRole> getAllAdminRolesPage(int page) {
+        Pageable pageable = PageRequest.of(page, 10);
+        return adminRoleRepo.findAll(pageable);
+    }
+
+    public Page<AdminRole> getAdminRolesByName(String name, int page){
+        Pageable pageable = PageRequest.of(page, 10);
+        return adminRoleRepo.findAllByNameContainsIgnoreCase(name, pageable);
+    }
+
     public List<Cast> getAllCharacters() {
         return castRepo.findAll();
     }
@@ -309,6 +327,26 @@ public class FindAllService {
         return productionCountryRepo.findAllByIdMovie(movie);
     }
 
+    public List<Authorization> getAllUsersByAdminRole(int id) throws ObjectNotFoundException {
+        AdminRole adminRole = findService.getAdminRole(id);
+        return authorizationRepo.findAllByIdAdminRole(adminRole);
+    }
+
+    public List<Authorization> getAllAdminRolesByUser(int id) throws ObjectNotFoundException {
+        User user = findService.getUser(id);
+        return authorizationRepo.findAllByIdUser(user);
+    }
+
+    public List<RolePermission> getAllPermissionsByAdminRole(int id) throws ObjectNotFoundException {
+        AdminRole adminRole = findService.getAdminRole(id);
+        return rolePermissionRepo.findAllByIdAdminRole(adminRole);
+    }
+
+    public List<RolePermission> getAllAdminRolesByPermission(int id) throws ObjectNotFoundException {
+        Permission permission = findService.getPermission(id);
+        return rolePermissionRepo.findAllByIdPermission(permission);
+    }
+
     public List<MovieKeyword> getAllMoviesByKeyword(int id) throws ObjectNotFoundException {
         Keyword keyword = findService.getKeyword(id);
         return movieKeywordRepo.findAllByIdKeyword(keyword);
@@ -333,4 +371,5 @@ public class FindAllService {
         Company company = findService.getCompany(id);
         return movieCompanyRepo.findAllByIdCompany(company);
     }
+
 }

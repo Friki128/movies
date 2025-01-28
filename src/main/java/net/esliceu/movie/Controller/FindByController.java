@@ -115,9 +115,9 @@ public class FindByController {
     }
 
     @GetMapping("/findAllPermissions")
-    public ResponseEntity<List<String>> Permissions(){
+    public ResponseEntity<List<JQueryElement>> Permissions(){
         List<Permission> permissions = findByService.getAllPermissions();
-        List<String> result = DTOUtil.mapStrings(permissions);
+        List<JQueryElement> result = DTOUtil.map(permissions);
         return ResponseEntity.ok(result);
     }
     @GetMapping("/findPermissions")
@@ -231,6 +231,23 @@ public class FindByController {
     public ResponseEntity<Page<Gender>> GendersByName(String name, int page){
         Page<Gender> genders = findByService.getGendersByName(name, page);
         return ResponseEntity.ok(genders);
+    }
+
+    @GetMapping("/findAllAdminRoles")
+    public ResponseEntity<List<JQueryElement>> AdminRoles(){
+        List<AdminRole> adminRoles = findByService.getAllAdminRoles();
+        List<JQueryElement> result = DTOUtil.map(adminRoles);
+        return ResponseEntity.ok(result);
+    }
+    @GetMapping("/findAdminRoles")
+    public ResponseEntity<Page<AdminRole>> AdminRoles(int page){
+        Page<AdminRole> adminRoles = findByService.getAllAdminRolesPage(page);
+        return ResponseEntity.ok(adminRoles);
+    }
+    @GetMapping("/findAdminRolesByName")
+    public ResponseEntity<Page<AdminRole>> AdminRolesByName(String name, int page){
+        Page<AdminRole> adminRoles = findByService.getAdminRolesByName(name, page);
+        return ResponseEntity.ok(adminRoles);
     }
 
     @GetMapping("/findAllGenres")

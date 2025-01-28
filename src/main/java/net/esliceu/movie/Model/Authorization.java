@@ -2,8 +2,6 @@ package net.esliceu.movie.Model;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity(name="authorization")
 public class Authorization implements MappableContainer{
 
@@ -39,7 +37,7 @@ public class Authorization implements MappableContainer{
     @Override
     public Mappable getMappable(String name) {
         return switch (name){
-            case "permission" -> getId().getPermission();
+            case "role" -> getId().getAdminRole();
             case "user" -> getId().getUser();
             default -> null;
         };
@@ -47,6 +45,9 @@ public class Authorization implements MappableContainer{
 
     @Override
     public String print(String exclude) {
-        return "";
+        return switch (exclude){
+            case "user" -> getId().getAdminRole().getName();
+            default -> getId().getUser().getName();
+        };
     }
 }

@@ -162,6 +162,17 @@ public class DeleteController {
         }
         return "redirect:/errorDisplay";
     }
+    @GetMapping("/deleteAdminRole")
+    public String deleteAdminRole(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        try {
+            AdminRole adminRole = findService.getAdminRole(id);
+            deleteService.deleteAdminRole(adminRole);
+            return "redirect:/";
+        } catch (ObjectNotFoundException e) {
+            redirectAttributes.addAttribute("error", "AdminRole Not Found");
+        }
+        return "redirect:/errorDisplay";
+    }
     @GetMapping("/deleteCompany")
     public String deleteCompany(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
         try {
@@ -274,14 +285,28 @@ public class DeleteController {
         }
         return "redirect:/errorDisplay";
     }
-    @GetMapping("/deletePersonsPermissions")
-    public String deletePersonsPermissions(Model model, RedirectAttributes redirectAttributes, @RequestParam int user, @RequestParam int permission){
+    @GetMapping("/deleteUserPermissions")
+    public String deleteUserPermissions(Model model, RedirectAttributes redirectAttributes, @RequestParam int user, @RequestParam int adminRole){
         try {
             User u = findService.getUser(user);
-            Permission p = findService.getPermission(permission);
-            AuthorizationId authorizationId = new AuthorizationId(p, u);
+            AdminRole r = findService.getAdminRole(adminRole);
+            AuthorizationId authorizationId = new AuthorizationId(r, u);
             Authorization authorization = findService.getAuthorization(authorizationId);
             deleteService.deleteAuthorization(authorization);
+            return "redirect:/";
+        } catch (ObjectNotFoundException e) {
+            redirectAttributes.addAttribute("error", "Element Not Found");
+        }
+        return "redirect:/errorDisplay";
+    }
+    @GetMapping("/deleteRolePermissions")
+    public String deleteRolePermissions(Model model, RedirectAttributes redirectAttributes, @RequestParam int permission, @RequestParam int adminRole){
+        try {
+            Permission p = findService.getPermission(permission);
+            AdminRole r = findService.getAdminRole(adminRole);
+            RolePermissionId rolePermissionId = new RolePermissionId(r, p);
+            RolePermission rolePermission = findService.getRolePermission(rolePermissionId);
+            deleteService.deleteRolePermission(rolePermission);
             return "redirect:/";
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Element Not Found");

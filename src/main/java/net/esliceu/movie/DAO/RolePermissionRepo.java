@@ -8,14 +8,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AuthorizationRepo extends JpaRepository<Authorization, AuthorizationId> {
+public interface RolePermissionRepo extends JpaRepository<RolePermission, RolePermissionId> {
     @Transactional
-    void deleteAllByIdUser(User user);
+    void deleteAllByIdPermission(Permission permission);
 
     @Transactional
     void deleteAllByIdAdminRole(AdminRole adminRole);
 
-    List<Authorization> findAllByIdAdminRole(AdminRole adminRole);
+    List<RolePermission> findAllByIdAdminRole(AdminRole adminRole);
 
-    List<Authorization> findAllByIdUser(User user);
+    List<RolePermission> findAllByIdPermission(Permission permission);
+
 }

@@ -42,6 +42,8 @@ public class UpdateService {
     @Autowired
     private MovieRepo movieRepo;
     @Autowired
+    private AdminRoleRepo adminRoleRepo;
+    @Autowired
     private MovieCompanyRepo movieCompanyRepo;
     @Autowired
     private MovieGenreRepo movieGenreRepo;
@@ -61,10 +63,10 @@ public class UpdateService {
         repo.save(updated);
     }
 
-    public void updateAuthorization(int permissionId, int userId, String status) throws ObjectNotFoundException {
-        Permission permission = findService.getPermission(permissionId);
+    public void updateAuthorization(int adminRoleId, int userId, String status) throws ObjectNotFoundException {
+        AdminRole adminRole = findService.getAdminRole(adminRoleId);
         User user = findService.getUser(userId);
-        AuthorizationId id = new AuthorizationId(permission, user);
+        AuthorizationId id = new AuthorizationId(adminRole, user);
         Authorization authorization = new Authorization(id, status);
         updateObject(id, authorization, authorizationRepo);
     }
@@ -82,6 +84,12 @@ public class UpdateService {
         Company company = new Company(name);
         company.setId(id);
         updateObject(id, company, companyRepo);
+    }
+
+    public void updateAdminRole(int id, String name) throws ObjectNotFoundException {
+        AdminRole adminRole = new AdminRole(name);
+        adminRole.setId(id);
+        updateObject(id, adminRole, adminRoleRepo);
     }
 
     public void updateCountry(int id, String isoCode, String name) throws ObjectNotFoundException {

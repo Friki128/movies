@@ -45,9 +45,13 @@ public class FindService {
     @Autowired
     private MovieGenreRepo movieGenreRepo;
     @Autowired
+    private AdminRoleRepo adminRoleRepo;
+    @Autowired
     private MovieKeywordRepo movieKeywordRepo;
     @Autowired
     private MovieLanguageRepo movieLanguageRepo;
+    @Autowired
+    private RolePermissionRepo rolePermissionRepo;
     @Autowired
     private PermissionRepo permissionRepo;
     @Autowired
@@ -63,12 +67,20 @@ public class FindService {
         return getValue(id, authorizationRepo);
     }
 
+    public RolePermission getRolePermission(RolePermissionId id) throws ObjectNotFoundException {
+        return getValue(id, rolePermissionRepo);
+    }
+
     public Cast getCast(CastId id) throws ObjectNotFoundException {
         return getValue(id, castRepo);
     }
 
     public Company getCompany(int id) throws ObjectNotFoundException {
         return getValue(id, companyRepo);
+    }
+
+    public AdminRole getAdminRole(int id) throws ObjectNotFoundException {
+        return getValue(id, adminRoleRepo);
     }
 
     public ProductionCountry getProductionCountry(ProductionCountryId id) throws ObjectNotFoundException {

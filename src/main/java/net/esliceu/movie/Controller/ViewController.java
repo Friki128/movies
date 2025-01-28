@@ -92,9 +92,11 @@ public class ViewController {
         try {
             User user = findService.getUser(id);
             List<ViewTableList> list = new ArrayList<>();
+            List<Authorization> authorizations = findAllService.getAllAdminRolesByUser(id);
             list.add(new ViewTableList("Name", "para", user.getName()));
             list.add(new ViewTableList("Email", "para", user.getEmail()));
             list.add(new ViewTableList("Status", "para", user.getStatus()));
+            list.add(new ViewTableList("Authorizations", "list", DTOUtil.printContainers(authorizations, "user"), true));
             model.addAttribute("id", id);
             model.addAttribute("type", "view");
             model.addAttribute("title", user.getName());
@@ -110,7 +112,9 @@ public class ViewController {
         try {
             Permission permission = findService.getPermission(id);
             List<ViewTableList> list = new ArrayList<>();
+            List<RolePermission> rolePermissions = findAllService.getAllAdminRolesByPermission(id);
             list.add(new ViewTableList("Name", "para", permission.getName()));
+            list.add(new ViewTableList("Roles", "list", DTOUtil.printContainers(rolePermissions, "permission")));
             model.addAttribute("id", id);
             model.addAttribute("type", "view");
             model.addAttribute("title", permission.getName());
@@ -177,6 +181,28 @@ public class ViewController {
         }
         return "redirect:/errorDisplay";
     }
+
+    @GetMapping("/viewAdminRole")
+    public String getAdminRole(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        try {
+            AdminRole adminRole = findService.getAdminRole(id);
+            List<ViewTableList> list = new ArrayList<>();
+            List<Authorization> authorizations = findAllService.getAllUsersByAdminRole(id);
+            List<RolePermission> rolePermissions = findAllService.getAllPermissionsByAdminRole(id);
+            list.add(new ViewTableList("Name", "para", adminRole.getName()));
+            list.add(new ViewTableList("Authorizations", "list", DTOUtil.printContainers(authorizations, "role")));
+            list.add(new ViewTableList("Permissions", "list", DTOUtil.printContainers(rolePermissions, "role"), true));
+            model.addAttribute("id", id);
+            model.addAttribute("type", "view");
+            model.addAttribute("title", adminRole.getName());
+            model.addAttribute("list", list);
+            return "viewOne";
+        } catch (ObjectNotFoundException e) {
+            redirectAttributes.addAttribute("error", "AdminRole Not Found");
+        }
+        return "redirect:/errorDisplay";
+    }
+
     @GetMapping("/viewCompany")
     public String getCompany(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
         try {

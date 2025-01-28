@@ -5,7 +5,9 @@ import net.esliceu.movie.Exceptions.EmptyNameException;
 import net.esliceu.movie.Exceptions.ObjectNotFoundException;
 import net.esliceu.movie.Exceptions.PasswordTooShortException;
 import net.esliceu.movie.Exceptions.UserNameInUseException;
+import net.esliceu.movie.Model.AdminRole;
 import net.esliceu.movie.Model.Movie;
+import net.esliceu.movie.Model.User;
 import net.esliceu.movie.Service.AddService;
 import net.esliceu.movie.Service.FindService;
 import net.esliceu.movie.Utils.ViewTableList;
@@ -179,6 +181,21 @@ public class AddController {
         return "redirect:/viewGenres";
     }
 
+    @GetMapping("/addAdminRole")
+    public String addGetAdminRole(Model model){
+        List<ViewTableList> list = new ArrayList<>();
+        list.add(new ViewTableList("name", "inputText", ""));
+        model.addAttribute("type", "add");
+        model.addAttribute("title", "AdminRole");
+        model.addAttribute("list", list);
+        return "viewOne";
+    }
+    @PostMapping("/addAdminRole")
+    public String addPostAdminRole(Model model, @RequestParam String name){
+        addService.addAdminRole(name);
+        return "redirect:/viewAdminRoles";
+    }
+
     @GetMapping("/addGender")
     public String addGetGender(Model model){
         List<ViewTableList> list = new ArrayList<>();
@@ -281,7 +298,7 @@ public class AddController {
         }
         return "redirect:/errorDisplay";
     }
-    @PostMapping("addMoviesKeywords")
+    @PostMapping("/addMoviesKeywords")
     public String addPostMoviesKeywords(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam int keyword){
         try {
             addService.addMovieKeyword(id, keyword);
@@ -308,7 +325,7 @@ public class AddController {
         }
         return "redirect:/errorDisplay";
     }
-    @PostMapping("addMoviesGenres")
+    @PostMapping("/addMoviesGenres")
     public String addPostMoviesGenres(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam int genre){
         try {
             addService.addMovieGenre(id, genre);
@@ -335,7 +352,7 @@ public class AddController {
         }
         return "redirect:/errorDisplay";
     }
-    @PostMapping("addMoviesCompanies")
+    @PostMapping("/addMoviesCompanies")
     public String addPostMoviesCompanies(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam int company){
         try {
             addService.addMovieCompany(id, company);
@@ -362,7 +379,7 @@ public class AddController {
         }
         return "redirect:/errorDisplay";
     }
-    @PostMapping("addMoviesCountries")
+    @PostMapping("/addMoviesCountries")
     public String addPostMoviesCountries(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam int country){
         try {
             addService.addProductionCountry(id, country);
@@ -390,7 +407,7 @@ public class AddController {
         }
         return "redirect:/errorDisplay";
     }
-    @PostMapping("addMoviesCrew")
+    @PostMapping("/addMoviesCrew")
     public String addPostMoviesCrew(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam int person, @RequestParam int department, @RequestParam String job){
         try {
             addService.addCrewMember(department, id, person, job);
@@ -420,10 +437,62 @@ public class AddController {
         }
         return "redirect:/errorDisplay";
     }
-    @PostMapping("addMoviesCast")
+    @PostMapping("/addMoviesCast")
     public String addPostMoviesCast(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam int person, @RequestParam int gender, @RequestParam String name, @RequestParam int order){
         try {
             addService.addCast(id, person, gender, name, order);
+            return "redirect:/viewMovies";
+        } catch (ObjectNotFoundException e) {
+            redirectAttributes.addAttribute("error", "Element Not Found");
+        }
+        return "redirect:/errorDisplay";
+    }
+    @GetMapping("/addUserPermissions")
+    public String addGetUserPermissions(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        try {
+            User user = findService.getUser(id);
+            List<ViewTableList> list = new ArrayList<>();
+            list.add(new ViewTableList("adminRole", "inputAuto", "/findAllAdminRoles"));
+            list.add(new ViewTableList("id", "inputId", id));
+            model.addAttribute("type", "add");
+            model.addAttribute("title", user.getName());
+            model.addAttribute("list", list);
+            return "viewOne";
+        } catch (ObjectNotFoundException e) {
+            redirectAttributes.addAttribute("error", "User Not Found");
+        }
+        return "redirect:/errorDisplay";
+    }
+    @PostMapping("/addUserPermissions")
+    public String addPostUserPermissions(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam int adminRole){
+        try {
+            addService.addAuthorization(adminRole, id, "approved");
+            return "redirect:/viewMovies";
+        } catch (ObjectNotFoundException e) {
+            redirectAttributes.addAttribute("error", "Element Not Found");
+        }
+        return "redirect:/errorDisplay";
+    }
+    @GetMapping("/addRolePermissions")
+    public String addGetRolePermissions(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        try {
+            AdminRole adminRole = findService.getAdminRole(id);
+            List<ViewTableList> list = new ArrayList<>();
+            list.add(new ViewTableList("permission", "inputAuto", "/findAllPermissions"));
+            list.add(new ViewTableList("id", "inputId", id));
+            model.addAttribute("type", "add");
+            model.addAttribute("title", adminRole.getName());
+            model.addAttribute("list", list);
+            return "viewOne";
+        } catch (ObjectNotFoundException e) {
+            redirectAttributes.addAttribute("error", "AdminRole Not Found");
+        }
+        return "redirect:/errorDisplay";
+    }
+    @PostMapping("/addRolePermissions")
+    public String addPostRolePermissions(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam int permission){
+        try {
+            addService.addRolePermission(id, permission);
             return "redirect:/viewMovies";
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Element Not Found");
