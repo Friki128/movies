@@ -1,10 +1,12 @@
 package net.esliceu.movie.Controller;
 
 import jakarta.servlet.http.HttpSession;
+import net.esliceu.movie.Exceptions.IncorrectPermissionsException;
 import net.esliceu.movie.Exceptions.ObjectNotFoundException;
 import net.esliceu.movie.Model.*;
 import net.esliceu.movie.Service.DeleteService;
 import net.esliceu.movie.Service.FindService;
+import net.esliceu.movie.Service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +24,17 @@ public class DeleteController {
     DeleteService deleteService;
     @Autowired
     FindService findService;
+    @Autowired
+    PermissionService permissionService;
     @GetMapping("/deleteMovie")
     public String deleteMovie(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Delete", "Movie", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Movie movie = findService.getMovie(id);
             deleteService.deleteMovie(movie);
@@ -35,6 +46,13 @@ public class DeleteController {
     }
     @GetMapping("/deleteDepartment")
     public String deleteDepartment(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Delete", "Department", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Department department = findService.getDepartment(id);
             deleteService.deleteDepartment(department);
@@ -47,6 +65,13 @@ public class DeleteController {
 
     @GetMapping("/deleteGenre")
     public String deleteGenre(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Delete", "Genre", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Genre genre = findService.getGenre(id);
             deleteService.deleteGenre(genre);
@@ -59,6 +84,13 @@ public class DeleteController {
 
     @GetMapping("/deleteGender")
     public String deleteGender(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Delete", "Gender", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Gender gender = findService.getGender(id);
             deleteService.deleteGender(gender);
@@ -71,6 +103,13 @@ public class DeleteController {
 
     @GetMapping("/deletePerson")
     public String deletePerson(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Delete", "Person", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Person person = findService.getPerson(id);
             deleteService.deletePerson(person);
@@ -83,6 +122,13 @@ public class DeleteController {
 
     @GetMapping("/deleteUser")
     public String deleteUser(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        try {
+            User user = (User) httpSession.getAttribute("user");
+            if(!permissionService.checkPermission("Delete", "User", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             User user = findService.getUser(id);
             deleteService.deleteUser(user);
@@ -107,6 +153,13 @@ public class DeleteController {
 
     @GetMapping("/deletePermission")
     public String deletePermission(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Delete", "Permission", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Permission permission = findService.getPermission(id);
             deleteService.deletePermission(permission);
@@ -119,6 +172,13 @@ public class DeleteController {
 
     @GetMapping("/deleteLanguage")
     public String deleteLanguage(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Delete", "Language", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Language language = findService.getLanguage(id);
             deleteService.deleteLanguage(language);
@@ -131,6 +191,13 @@ public class DeleteController {
 
     @GetMapping("/deleteLanguageRole")
     public String deleteLanguageRole(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Delete", "LanguageRole", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             LanguageRole languageRole = findService.getLanguageRole(id);
             deleteService.deleteLanguageRole(languageRole);
@@ -142,6 +209,13 @@ public class DeleteController {
     }
     @GetMapping("/deleteKeyword")
     public String deleteKeyword(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Delete", "Keyword", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Keyword keyword = findService.getKeyword(id);
             deleteService.deleteKeyword(keyword);
@@ -153,6 +227,13 @@ public class DeleteController {
     }
     @GetMapping("/deleteCountry")
     public String deleteCountry(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Delete", "Country", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Country country = findService.getCountry(id);
             deleteService.deleteCountry(country);
@@ -164,6 +245,13 @@ public class DeleteController {
     }
     @GetMapping("/deleteAdminRole")
     public String deleteAdminRole(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Delete", "AdminRole", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             AdminRole adminRole = findService.getAdminRole(id);
             deleteService.deleteAdminRole(adminRole);
@@ -175,6 +263,13 @@ public class DeleteController {
     }
     @GetMapping("/deleteCompany")
     public String deleteCompany(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Delete", "Company", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Company company = findService.getCompany(id);
             deleteService.deleteCompany(company);
@@ -186,6 +281,13 @@ public class DeleteController {
     }
     @GetMapping("/deleteMoviesLanguages")
     public String deleteMovieLanguage(Model model, RedirectAttributes redirectAttributes, @RequestParam int movie, @RequestParam int language, @RequestParam int languageRole){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Movie m = findService.getMovie(movie);
             Language l = findService.getLanguage(language);
@@ -201,6 +303,13 @@ public class DeleteController {
     }
     @GetMapping("/deleteMoviesGenres")
     public String deleteMovieGenre(Model model, RedirectAttributes redirectAttributes, @RequestParam int movie, @RequestParam int genre){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Movie m = findService.getMovie(movie);
             Genre g = findService.getGenre(genre);
@@ -215,6 +324,13 @@ public class DeleteController {
     }
     @GetMapping("/deleteMoviesKeywords")
     public String deleteMovieKeyword(Model model, RedirectAttributes redirectAttributes, @RequestParam int movie, @RequestParam int keyword){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Movie m = findService.getMovie(movie);
             Keyword k = findService.getKeyword(keyword);
@@ -229,6 +345,13 @@ public class DeleteController {
     }
     @GetMapping("/deleteMoviesCompanies")
     public String deleteMovieCompany(Model model, RedirectAttributes redirectAttributes, @RequestParam int movie, @RequestParam int company){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Movie m = findService.getMovie(movie);
             Company c = findService.getCompany(company);
@@ -243,6 +366,13 @@ public class DeleteController {
     }
     @GetMapping("/deleteMoviesCast")
     public String deleteMoviesCast(Model model, RedirectAttributes redirectAttributes, @RequestParam int movie, @RequestParam int person, @RequestParam int gender){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Movie m = findService.getMovie(movie);
             Gender g = findService.getGender(gender);
@@ -258,6 +388,13 @@ public class DeleteController {
     }
     @GetMapping("/deleteMoviesCrew")
     public String deleteMoviesCrew(Model model, RedirectAttributes redirectAttributes, @RequestParam int movie, @RequestParam int person, @RequestParam int department){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Movie m = findService.getMovie(movie);
             Department d = findService.getDepartment(department);
@@ -273,6 +410,13 @@ public class DeleteController {
     }
     @GetMapping("/deleteMoviesCountries")
     public String deleteMoviesCountries(Model model, RedirectAttributes redirectAttributes, @RequestParam int movie, @RequestParam int country){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Movie m = findService.getMovie(movie);
             Country c = findService.getCountry(country);
@@ -288,6 +432,13 @@ public class DeleteController {
     @GetMapping("/deleteUserPermissions")
     public String deleteUserPermissions(Model model, RedirectAttributes redirectAttributes, @RequestParam int user, @RequestParam int adminRole){
         try {
+            User u = (User) httpSession.getAttribute("user");
+            if(!permissionService.checkPermission("Update", "User", u))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
+        try {
             User u = findService.getUser(user);
             AdminRole r = findService.getAdminRole(adminRole);
             AuthorizationId authorizationId = new AuthorizationId(r, u);
@@ -301,6 +452,13 @@ public class DeleteController {
     }
     @GetMapping("/deleteRolePermissions")
     public String deleteRolePermissions(Model model, RedirectAttributes redirectAttributes, @RequestParam int permission, @RequestParam int adminRole){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "AdminRole", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Permission p = findService.getPermission(permission);
             AdminRole r = findService.getAdminRole(adminRole);

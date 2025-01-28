@@ -1,13 +1,11 @@
 package net.esliceu.movie.Controller;
 
 import jakarta.servlet.http.HttpSession;
-import net.esliceu.movie.Exceptions.EmptyNameException;
-import net.esliceu.movie.Exceptions.ObjectNotFoundException;
-import net.esliceu.movie.Exceptions.PasswordTooShortException;
-import net.esliceu.movie.Exceptions.UserNameInUseException;
+import net.esliceu.movie.Exceptions.*;
 import net.esliceu.movie.Model.*;
 import net.esliceu.movie.Service.AddService;
 import net.esliceu.movie.Service.FindService;
+import net.esliceu.movie.Service.PermissionService;
 import net.esliceu.movie.Service.UpdateService;
 import net.esliceu.movie.Utils.ViewTableList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +27,17 @@ public class UpdateController {
     UpdateService updateService;
     @Autowired
     FindService findService;
+    @Autowired
+    PermissionService permissionService;
     @GetMapping("/updateCompany")
     public String updateGetCompany(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Company", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Company company = findService.getCompany(id);
             List<ViewTableList> list = new ArrayList<>();
@@ -48,6 +55,13 @@ public class UpdateController {
     }
     @PostMapping("/updateCompany")
     public String updatePostCompany(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam String name){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Company", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             updateService.updateCompany(id, name);
             return "redirect:/viewCompanies";
@@ -59,6 +73,13 @@ public class UpdateController {
 
     @GetMapping("/updateCountry")
     public String updateGetCountry(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Country", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Country country = findService.getCountry(id);
             List<ViewTableList> list = new ArrayList<>();
@@ -76,6 +97,13 @@ public class UpdateController {
     }
     @PostMapping("/updateCountry")
     public String updatePostCountry(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam String isoCode, @RequestParam String name){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Country", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             updateService.updateCountry(id, isoCode, name);
             return "redirect:/viewCountries";
@@ -87,6 +115,13 @@ public class UpdateController {
 
     @GetMapping("/updatePerson")
     public String updateGetPerson(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Person", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Person person = findService.getPerson(id);
             List<ViewTableList> list = new ArrayList<>();
@@ -103,6 +138,13 @@ public class UpdateController {
     }
     @PostMapping("/updatePerson")
     public String updatePostPerson(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam String name){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Person", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             updateService.updatePerson(id, name);
             return "redirect:/viewPersons";
@@ -114,6 +156,13 @@ public class UpdateController {
 
     @GetMapping("/updateUser")
     public String updateGetUser(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        try {
+            User user = (User) httpSession.getAttribute("user");
+            if(!permissionService.checkPermission("Update", "User", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             User user = findService.getUser(id);
             List<ViewTableList> list = new ArrayList<>();
@@ -133,6 +182,13 @@ public class UpdateController {
     }
     @PostMapping("/updateUser")
     public String updatePostUser(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam String name, @RequestParam String email, @RequestParam String status){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "User", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             updateService.updateUser(id, name, email, status);
             return "redirect:/viewUsers";
@@ -148,6 +204,13 @@ public class UpdateController {
 
     @GetMapping("/updatePermission")
     public String updateGetPermission(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Permission", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Permission permission = findService.getPermission(id);
             List<ViewTableList> list = new ArrayList<>();
@@ -164,6 +227,13 @@ public class UpdateController {
     }
     @PostMapping("/updatePermission")
     public String updatePostPermission(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam String name){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Permission", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             updateService.updatePermission(id, name);
             return "redirect:/viewPermissions";
@@ -175,6 +245,13 @@ public class UpdateController {
 
     @GetMapping("/updateLanguage")
     public String updateGetLanguage(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Language", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Language language = findService.getLanguage(id);
             List<ViewTableList> list = new ArrayList<>();
@@ -193,6 +270,13 @@ public class UpdateController {
     }
     @PostMapping("/updateLanguage")
     public String updatePostLanguage(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam String code, @RequestParam String name){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Language", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             updateService.updateLanguage(id, code, name);
             return "redirect:/viewLanguages";
@@ -204,6 +288,13 @@ public class UpdateController {
 
     @GetMapping("/updateLanguageRole")
     public String updateGetLanguageRole(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "LanguageRole", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             LanguageRole languageRole = findService.getLanguageRole(id);
             List<ViewTableList> list = new ArrayList<>();
@@ -220,6 +311,13 @@ public class UpdateController {
     }
     @PostMapping("/updateLanguageRole")
     public String updatePostLanguageRole(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam String role){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "LanguageRole", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             updateService.updateLanguageRole(id, role);
             return "redirect:/viewLanguageRoles";
@@ -231,6 +329,13 @@ public class UpdateController {
 
     @GetMapping("/updateKeyword")
     public String updateGetKeyword(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Keyword", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Keyword keyword = findService.getKeyword(id);
             List<ViewTableList> list = new ArrayList<>();
@@ -247,6 +352,13 @@ public class UpdateController {
     }
     @PostMapping("/updateKeyword")
     public String updatePostKeyword(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam String name){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Keyword", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             updateService.updateKeyword(id, name);
             return "redirect:/viewKeywords";
@@ -258,6 +370,13 @@ public class UpdateController {
 
     @GetMapping("/updateGenre")
     public String updateGetGenre(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Genre", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Genre genre = findService.getGenre(id);
             List<ViewTableList> list = new ArrayList<>();
@@ -274,6 +393,13 @@ public class UpdateController {
     }
     @PostMapping("/updateGenre")
     public String updatePostGenre(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam String name){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Genre", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             updateService.updateGenre(id, name);
             return "redirect:/viewGenres";
@@ -285,6 +411,13 @@ public class UpdateController {
 
     @GetMapping("/updateGender")
     public String updateGetGender(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Gender", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Gender gender = findService.getGender(id);
             List<ViewTableList> list = new ArrayList<>();
@@ -302,6 +435,13 @@ public class UpdateController {
     }
     @PostMapping("/updateGender")
     public String updatePostGender(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam String name){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Gender", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             updateService.updateGender(id, name);
             return "redirect:/viewGenders";
@@ -313,6 +453,13 @@ public class UpdateController {
 
     @GetMapping("/updateDepartment")
     public String updateGetDepartment(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Department", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Department department = findService.getDepartment(id);
             List<ViewTableList> list = new ArrayList<>();
@@ -329,6 +476,13 @@ public class UpdateController {
     }
     @PostMapping("/updateDepartment")
     public String updatePostDepartment(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam String name){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Department", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             updateService.updateDepartment(id, name);
             return "redirect:/viewDepartments";
@@ -340,6 +494,13 @@ public class UpdateController {
 
     @GetMapping("/updateAdminRole")
     public String updateGetAdminRole(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "AdminRole", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             AdminRole adminRole = findService.getAdminRole(id);
             List<ViewTableList> list = new ArrayList<>();
@@ -356,6 +517,13 @@ public class UpdateController {
     }
     @PostMapping("/updateAdminRole")
     public String updatePostAdminRole(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam String name){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "AdminRole", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             updateService.updateAdminRole(id, name);
             return "redirect:/viewAdminRoles";
@@ -367,6 +535,13 @@ public class UpdateController {
 
     @GetMapping("/updateMovie")
     public String updateGetMovie(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             Movie movie = findService.getMovie(id);
             List<ViewTableList> list = new ArrayList<>();
@@ -394,6 +569,13 @@ public class UpdateController {
     }
     @PostMapping("/updateMovie")
     public String updatePostMovie(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam String title, @RequestParam int budget, @RequestParam String homepage, @RequestParam String overview, @RequestParam double popularity, @RequestParam String releaseDate, @RequestParam int revenue, @RequestParam int runtime, @RequestParam String status, @RequestParam String tagline, @RequestParam double voteAverage, @RequestParam int voteCount){
+        User user = (User) httpSession.getAttribute("user");
+        try {
+            if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
+        } catch (Exception e){
+            redirectAttributes.addAttribute("error", "Cannot access this page.");
+            return "redirect:/errorDisplay";
+        }
         try {
             updateService.updateMovie(id, title, budget, homepage, overview, popularity, releaseDate, revenue, runtime, status, tagline, voteAverage, voteCount);
             return "redirect:/viewMovies";
