@@ -35,10 +35,10 @@ public class DTOUtil {
         }
         return mapStrings(result);
     }
-    public static List<String> printContainers(List<? extends MappableContainer> values, String exclude){
-        List<String> result = new ArrayList<>();
+    public static List<UrlIdObject> printContainers(List<? extends MappableContainer> values, String exclude){
+        List<UrlIdObject> result = new ArrayList<>();
         for(MappableContainer value : values){
-            result.add(value.print(exclude));
+            result.add(new UrlIdObject(value.url(), value.print(exclude)));
         }
         return result;
     }

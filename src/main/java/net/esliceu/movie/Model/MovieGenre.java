@@ -39,4 +39,9 @@ public class MovieGenre implements MappableContainer{
         };
     }
 
+    @Override
+    public String url() {
+        return "?movie=" + getId().getMovie().getId() + "&genre=" + getId().getGenre().getId();
+    }
+
 }

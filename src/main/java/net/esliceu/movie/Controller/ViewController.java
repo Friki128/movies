@@ -5,6 +5,7 @@ import net.esliceu.movie.Exceptions.ObjectNotFoundException;
 import net.esliceu.movie.Model.*;
 import net.esliceu.movie.Service.FindAllService;
 import net.esliceu.movie.Service.FindService;
+import net.esliceu.movie.Service.PermissionService;
 import net.esliceu.movie.Utils.DTOUtil;
 import net.esliceu.movie.Utils.ViewTableList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,25 @@ public class ViewController {
     FindService findService;
     @Autowired
     FindAllService findAllService;
+    @Autowired
+    PermissionService permissionService;
+
+    private void setModel(Model model, String table, String type, int id, String title, List<ViewTableList> list) throws ObjectNotFoundException {
+        User user = (User) httpSession.getAttribute("user");
+        Boolean canUpdate = false;
+        Boolean canDelete = false;
+        if(user != null){
+            canUpdate = permissionService.checkPermission("Update", table, user);
+            canDelete =  permissionService.checkPermission("Delete", table, user);
+        }
+        model.addAttribute("id", id);
+        model.addAttribute("list", list);
+        model.addAttribute("type", type);
+        model.addAttribute("title", title);
+        model.addAttribute("table", table);
+        model.addAttribute("canUpdate",canUpdate);
+        model.addAttribute("canDelete",canDelete);
+    }
 
     @GetMapping("/viewMovie")
     public String getMovie(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
@@ -37,8 +57,6 @@ public class ViewController {
             List<CrewMember> crew = findAllService.getAllCrewByMovie(id);
             List<Cast> cast = findAllService.getAllCastByMovie(id);
             List<ProductionCountry> countries = findAllService.getAllCountriesByMovie(id);
-            model.addAttribute("title", movie.getTitle());
-            model.addAttribute("id", id);
             List<ViewTableList> list = new ArrayList<>();
             list.add(new ViewTableList("Title", "para", movie.getTitle()));
             list.add(new ViewTableList("Status", "para", movie.getStatus()));
@@ -52,20 +70,19 @@ public class ViewController {
             list.add(new ViewTableList("Vote Average", "para", movie.getVoteAverage()));
             list.add(new ViewTableList("Vote Count", "para", movie.getVoteCount()));
             list.add(new ViewTableList("Homepage", "para", movie.getHomepage()));
-            list.add(new ViewTableList("Languages", "list", DTOUtil.printContainers(movieLanguages, "movie"), true));
-            list.add(new ViewTableList("Keywords", "list", DTOUtil.printContainers(keywords, "movie"), true));
-            list.add(new ViewTableList("Genres", "list", DTOUtil.printContainers(genres, "movie"), true));
-            list.add(new ViewTableList("Companies", "list", DTOUtil.printContainers(companies, "movie"), true));
-            list.add(new ViewTableList("Crew", "list", DTOUtil.printContainers(crew, "movie"), true));
-            list.add(new ViewTableList("Characters", "list", DTOUtil.printContainers(cast, "movie"), true));
-            list.add(new ViewTableList("Countries", "list", DTOUtil.printContainers(countries, "movie"), true));
-            model.addAttribute("list", list);
-            model.addAttribute("type", "view");
+            list.add(new ViewTableList("Languages", "list", DTOUtil.printContainers(movieLanguages, "movie"), true, "MoviesLanguages"));
+            list.add(new ViewTableList("Keywords", "list", DTOUtil.printContainers(keywords, "movie"), true, "MoviesKeywords"));
+            list.add(new ViewTableList("Genres", "list", DTOUtil.printContainers(genres, "movie"), true, "MoviesGenres"));
+            list.add(new ViewTableList("Companies", "list", DTOUtil.printContainers(companies, "movie"), true, "MoviesCompanies"));
+            list.add(new ViewTableList("Crew", "list", DTOUtil.printContainers(crew, "movie"), true, "MoviesCrew"));
+            list.add(new ViewTableList("Characters", "list", DTOUtil.printContainers(cast, "movie"), true, "MoviesCast"));
+            list.add(new ViewTableList("Countries", "list", DTOUtil.printContainers(countries, "movie"), true, "MoviesCountries"));
+            setModel(model, "Movie", "view", id, movie.getTitle(), list);
             return "viewOne";
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Movie Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @GetMapping("/viewPerson")
     public String getPerson(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
@@ -77,15 +94,12 @@ public class ViewController {
             list.add(new ViewTableList("Name", "para", person.getName()));
             list.add(new ViewTableList("Played", "list", DTOUtil.printContainers(cast, "person")));
             list.add(new ViewTableList("Worked", "list", DTOUtil.printContainers(crew, "person")));
-            model.addAttribute("id", id);
-            model.addAttribute("type", "view");
-            model.addAttribute("title", person.getName());
-            model.addAttribute("list", list);
+            setModel(model, "Person", "view", id, person.getName(), list);
             return "viewOne";
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Person Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @GetMapping("/viewUser")
     public String getUser(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
@@ -96,16 +110,13 @@ public class ViewController {
             list.add(new ViewTableList("Name", "para", user.getName()));
             list.add(new ViewTableList("Email", "para", user.getEmail()));
             list.add(new ViewTableList("Status", "para", user.getStatus()));
-            list.add(new ViewTableList("Authorizations", "list", DTOUtil.printContainers(authorizations, "user"), true));
-            model.addAttribute("id", id);
-            model.addAttribute("type", "view");
-            model.addAttribute("title", user.getName());
-            model.addAttribute("list", list);
+            list.add(new ViewTableList("Authorizations", "list", DTOUtil.printContainers(authorizations, "user"), true, "UserPermissions"));
+            setModel(model, "User", "view", id, user.getName(), list);
             return "viewOne";
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "User Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @GetMapping("/viewPermission")
     public String getPermission(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
@@ -115,15 +126,12 @@ public class ViewController {
             List<RolePermission> rolePermissions = findAllService.getAllAdminRolesByPermission(id);
             list.add(new ViewTableList("Name", "para", permission.getName()));
             list.add(new ViewTableList("Roles", "list", DTOUtil.printContainers(rolePermissions, "permission")));
-            model.addAttribute("id", id);
-            model.addAttribute("type", "view");
-            model.addAttribute("title", permission.getName());
-            model.addAttribute("list", list);
+            setModel(model, "Permission", "view", id, permission.getName(), list);
             return "viewOne";
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Permission Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @GetMapping("/viewLanguageRole")
     public String getLanguageRole(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
@@ -133,15 +141,12 @@ public class ViewController {
             List<MovieLanguage> movieLanguages = findAllService.getLanguagesByRole(id);
             list.add(new ViewTableList("Name", "para", languageRole.getName()));
             list.add(new ViewTableList("Movies", "list", DTOUtil.printContainers(movieLanguages, "role")));
-            model.addAttribute("id", id);
-            model.addAttribute("type", "view");
-            model.addAttribute("title", languageRole.getName());
-            model.addAttribute("list", list);
+            setModel(model, "LanguageRole", "view", id, languageRole.getName(), list);
             return "viewOne";
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Role Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @GetMapping("/viewLanguage")
     public String getLanguage(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
@@ -152,15 +157,12 @@ public class ViewController {
             list.add(new ViewTableList("Name", "para", language.getName()));
             list.add(new ViewTableList("Code", "para", language.getCode()));
             list.add(new ViewTableList("Movies", "list", DTOUtil.printContainers(movieLanguages, "language")));
-            model.addAttribute("id", id);
-            model.addAttribute("type", "view");
-            model.addAttribute("title", language.getName());
-            model.addAttribute("list", list);
+            setModel(model, "Language", "view", id, language.getName(), list);
             return "viewOne";
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Language Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @GetMapping("/viewCountry")
     public String getCountry(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
@@ -171,15 +173,12 @@ public class ViewController {
             list.add(new ViewTableList("Name", "para", country.getName()));
             list.add(new ViewTableList("Iso", "para", country.getIsoCode()));
             list.add(new ViewTableList("Movies", "list", DTOUtil.printContainers(movies, "country")));
-            model.addAttribute("id", id);
-            model.addAttribute("type", "view");
-            model.addAttribute("title", country.getName());
-            model.addAttribute("list", list);
+            setModel(model, "Country", "view", id, country.getName(), list);
             return "viewOne";
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Country Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
 
     @GetMapping("/viewAdminRole")
@@ -191,16 +190,13 @@ public class ViewController {
             List<RolePermission> rolePermissions = findAllService.getAllPermissionsByAdminRole(id);
             list.add(new ViewTableList("Name", "para", adminRole.getName()));
             list.add(new ViewTableList("Authorizations", "list", DTOUtil.printContainers(authorizations, "role")));
-            list.add(new ViewTableList("Permissions", "list", DTOUtil.printContainers(rolePermissions, "role"), true));
-            model.addAttribute("id", id);
-            model.addAttribute("type", "view");
-            model.addAttribute("title", adminRole.getName());
-            model.addAttribute("list", list);
+            list.add(new ViewTableList("Permissions", "list", DTOUtil.printContainers(rolePermissions, "role"), true, "RolePermissions"));
+            setModel(model, "AdminRole", "view", id, adminRole.getName(), list);
             return "viewOne";
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "AdminRole Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
 
     @GetMapping("/viewCompany")
@@ -211,15 +207,12 @@ public class ViewController {
             List<MovieCompany> movies = findAllService.getAllMoviesByCompany(id);
             list.add(new ViewTableList("Name", "para", company.getName()));
             list.add(new ViewTableList("Movies", "list", DTOUtil.printContainers(movies, "company")));
-            model.addAttribute("id", id);
-            model.addAttribute("type", "view");
-            model.addAttribute("title", company.getName());
-            model.addAttribute("list", list);
+            setModel(model, "Company", "view", id, company.getName(), list);
             return "viewOne";
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Company Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @GetMapping("/viewKeyword")
     public String getKeyword(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
@@ -229,15 +222,12 @@ public class ViewController {
             List<ViewTableList> list = new ArrayList<>();
             list.add(new ViewTableList("Name", "para", keyword.getName()));
             list.add(new ViewTableList("Movies", "list", DTOUtil.printContainers(movies, "keyword")));
-            model.addAttribute("id", id);
-            model.addAttribute("type", "view");
-            model.addAttribute("title", keyword.getName());
-            model.addAttribute("list", list);
+            setModel(model, "Keyword", "view", id, keyword.getName(), list);
             return "viewOne";
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Keyword Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @GetMapping("/viewDepartment")
     public String getDepartment(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
@@ -247,15 +237,12 @@ public class ViewController {
             List<ViewTableList> list = new ArrayList<>();
             list.add(new ViewTableList("Name", "para", department.getName()));
             list.add(new ViewTableList("Work", "list", DTOUtil.printContainers(crewMembers, "department")));
-            model.addAttribute("id", id);
-            model.addAttribute("type", "view");
-            model.addAttribute("title", department.getName());
-            model.addAttribute("list", list);
+            setModel(model, "Department", "view", id, department.getName(), list);
             return "viewOne";
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Department Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @GetMapping("/viewGender")
     public String getGender(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
@@ -265,15 +252,12 @@ public class ViewController {
             List<Cast> characters = findAllService.getAllCastByGender(id);
             list.add(new ViewTableList("name", "para", gender.getName()));
             list.add(new ViewTableList("Characters", "list", DTOUtil.printContainers(characters, "gender")));
-            model.addAttribute("id", id);
-            model.addAttribute("type", "view");
-            model.addAttribute("title", gender.getName());
-            model.addAttribute("list", list);
+            setModel(model, "Gender", "view", id, gender.getName(), list);
             return "viewOne";
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Gender Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @GetMapping("/viewGenre")
     public String getGenre(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
@@ -283,14 +267,11 @@ public class ViewController {
             List<MovieGenre> movies = findAllService.getAllMoviesByGenre(id);
             list.add(new ViewTableList("Name", "para", genre.getName()));
             list.add(new ViewTableList("Movies", "list", DTOUtil.printContainers(movies, "genre")));
-            model.addAttribute("id", id);
-            model.addAttribute("type", "view");
-            model.addAttribute("title", genre.getName());
-            model.addAttribute("list", list);
+            setModel(model, "Genre", "view", id, genre.getName(), list);
             return "viewOne";
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Genre Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
 }

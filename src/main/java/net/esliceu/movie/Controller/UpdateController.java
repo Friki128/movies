@@ -36,7 +36,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "Company", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             Company company = findService.getCompany(id);
@@ -50,7 +50,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Company Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
 
     }
     @PostMapping("/updateCompany")
@@ -60,7 +60,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "Company", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             updateService.updateCompany(id, name);
@@ -68,7 +68,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Company Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
 
     @GetMapping("/updateCountry")
@@ -78,7 +78,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "Country", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             Country country = findService.getCountry(id);
@@ -93,7 +93,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Country Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @PostMapping("/updateCountry")
     public String updatePostCountry(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam String isoCode, @RequestParam String name){
@@ -102,7 +102,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "Country", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             updateService.updateCountry(id, isoCode, name);
@@ -110,7 +110,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Country Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
 
     @GetMapping("/updatePerson")
@@ -120,7 +120,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "Person", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             Person person = findService.getPerson(id);
@@ -134,7 +134,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Person Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @PostMapping("/updatePerson")
     public String updatePostPerson(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam String name){
@@ -143,7 +143,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "Person", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             updateService.updatePerson(id, name);
@@ -151,7 +151,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Person Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
 
     @GetMapping("/updateUser")
@@ -161,7 +161,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "User", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             User user = findService.getUser(id);
@@ -177,7 +177,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "User Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
 
     }
     @PostMapping("/updateUser")
@@ -187,7 +187,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "User", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             updateService.updateUser(id, name, email, status);
@@ -199,7 +199,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "User Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
 
     @GetMapping("/updatePermission")
@@ -209,7 +209,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "Permission", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             Permission permission = findService.getPermission(id);
@@ -223,7 +223,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Permission Not Found");
         }
-       return "redirect:/errorDisplay";
+       return "redirect:/error";
     }
     @PostMapping("/updatePermission")
     public String updatePostPermission(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam String name){
@@ -232,7 +232,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "Permission", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             updateService.updatePermission(id, name);
@@ -240,7 +240,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Permission Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
 
     @GetMapping("/updateLanguage")
@@ -250,7 +250,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "Language", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             Language language = findService.getLanguage(id);
@@ -265,7 +265,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Language Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
 
     }
     @PostMapping("/updateLanguage")
@@ -275,7 +275,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "Language", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             updateService.updateLanguage(id, code, name);
@@ -283,7 +283,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Language Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
 
     @GetMapping("/updateLanguageRole")
@@ -293,7 +293,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "LanguageRole", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             LanguageRole languageRole = findService.getLanguageRole(id);
@@ -307,7 +307,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "LanguageRole Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @PostMapping("/updateLanguageRole")
     public String updatePostLanguageRole(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam String role){
@@ -316,7 +316,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "LanguageRole", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             updateService.updateLanguageRole(id, role);
@@ -324,7 +324,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "LanguageRole Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
 
     @GetMapping("/updateKeyword")
@@ -334,7 +334,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "Keyword", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             Keyword keyword = findService.getKeyword(id);
@@ -348,7 +348,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Keyword Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @PostMapping("/updateKeyword")
     public String updatePostKeyword(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam String name){
@@ -357,7 +357,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "Keyword", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             updateService.updateKeyword(id, name);
@@ -365,7 +365,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Keyword Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
 
     @GetMapping("/updateGenre")
@@ -375,7 +375,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "Genre", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             Genre genre = findService.getGenre(id);
@@ -389,7 +389,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Genre Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @PostMapping("/updateGenre")
     public String updatePostGenre(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam String name){
@@ -398,7 +398,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "Genre", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             updateService.updateGenre(id, name);
@@ -406,7 +406,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Genre Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
 
     @GetMapping("/updateGender")
@@ -416,7 +416,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "Gender", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             Gender gender = findService.getGender(id);
@@ -430,7 +430,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Gender Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
 
     }
     @PostMapping("/updateGender")
@@ -440,7 +440,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "Gender", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             updateService.updateGender(id, name);
@@ -448,7 +448,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Gender Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
 
     @GetMapping("/updateDepartment")
@@ -458,7 +458,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "Department", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             Department department = findService.getDepartment(id);
@@ -472,7 +472,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Department Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @PostMapping("/updateDepartment")
     public String updatePostDepartment(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam String name){
@@ -481,7 +481,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "Department", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             updateService.updateDepartment(id, name);
@@ -489,7 +489,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Department Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
 
     @GetMapping("/updateAdminRole")
@@ -499,7 +499,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "AdminRole", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             AdminRole adminRole = findService.getAdminRole(id);
@@ -513,7 +513,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "AdminRole Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @PostMapping("/updateAdminRole")
     public String updatePostAdminRole(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam String name){
@@ -522,7 +522,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "AdminRole", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             updateService.updateAdminRole(id, name);
@@ -530,7 +530,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "AdminRole Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
 
     @GetMapping("/updateMovie")
@@ -540,7 +540,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             Movie movie = findService.getMovie(id);
@@ -565,7 +565,7 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Movie Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @PostMapping("/updateMovie")
     public String updatePostMovie(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam String title, @RequestParam int budget, @RequestParam String homepage, @RequestParam String overview, @RequestParam double popularity, @RequestParam String releaseDate, @RequestParam int revenue, @RequestParam int runtime, @RequestParam String status, @RequestParam String tagline, @RequestParam double voteAverage, @RequestParam int voteCount){
@@ -574,7 +574,7 @@ public class UpdateController {
             if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             updateService.updateMovie(id, title, budget, homepage, overview, popularity, releaseDate, revenue, runtime, status, tagline, voteAverage, voteCount);
@@ -582,6 +582,6 @@ public class UpdateController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Movie Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
 }

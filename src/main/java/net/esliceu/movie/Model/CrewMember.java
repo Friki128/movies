@@ -53,4 +53,9 @@ public class CrewMember implements MappableContainer{
             default -> this.getId().getPerson().getName() + " in " + this.getId().getMovie().getTitle();
         };
     }
+
+    @Override
+    public String url() {
+        return "?movie=" + getId().getMovie().getId() + "&person=" + getId().getPerson().getId() + "&department=" + getId().getDepartment().getId();
+    }
 }

@@ -13,10 +13,22 @@
         <nav class="start">
             <a class="button" href="/viewMovies">Movies</a>
             <a class="button" href="/viewPersons">People</a>
+            <a class="button" href="/viewGenres">Genres</a>
+            <a class="button" href="/viewGenders">Genders</a>
+            <a class="button" href="/viewCompanies">Companies</a>
+            <a class="button" href="/viewUsers">Users</a>
+            <a class="button" href="/viewDepartments">Departments</a>
+            <a class="button" href="/viewCountries">Countries</a>
+            <a class="button" href="/viewAdminRoles">Admin Roles</a>
+            <a class="button" href="/viewLanguageRoles">Language Roles</a>
+            <a class="button" href="/viewLanguages">Languages</a>
+            <a class="button" href="/viewPermissions">Permissions</a>
+            <a class="button" href="/viewKeywords">Keywords</a>
         </nav>
         <nav class="end">
             <a class="button" href="/login" th:if="${logged == false}">Login</a>
-            <a class="button" href="/viewProfile" th:unless="${logged == false}">User Profile</a>
+            <a class="button" href="/logout" th:if="${logged == true}">Log Out</a>
+            <a class="button" href="/deleteAccount" th:if="${logged == true}">Delete Account</a>
         </nav>
     </div>
     
@@ -33,6 +45,7 @@
             <label id="label" for="input">Name</label>
             <input type="text" name="input" id="input">
             <button id="btn">Search</button>
+            <a th:if="${canAdd}" th:href="${'/add' + addValue}" class="button">Add</a>
         </div>
     </div>
     <div id="list" class="list"></div>

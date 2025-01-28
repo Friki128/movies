@@ -8,14 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ErrorPageController implements ErrorController {
-    @RequestMapping("/errorDisplay")
-    public String error(Model model, @RequestParam String error) {
-        model.addAttribute("error", error);
-        return "errorPage";
-    }
-
     @RequestMapping("/error")
-    public String defaultError() {
+    public String error(Model model, @RequestParam(required = false) String error) {
+        model.addAttribute("error", error);
         return "errorPage";
     }
 

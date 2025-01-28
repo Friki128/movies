@@ -37,4 +37,9 @@ public class ProductionCountry implements MappableContainer{
             default -> getId().getMovie().getName();
         };
     }
+
+    @Override
+    public String url() {
+        return "?country=" + getId().getCountry().getId() + "&movie=" + getId().getMovie().getId();
+    }
 }

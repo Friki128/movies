@@ -38,4 +38,9 @@ public class MovieCompany implements MappableContainer{
             default -> getId().getMovie().getName();
         };
     }
+
+    @Override
+    public String url() {
+        return "?movie=" + getId().getMovie().getId() + "&company=" + getId().getCompany().getId();
+    }
 }

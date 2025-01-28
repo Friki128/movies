@@ -5,19 +5,22 @@ public class ViewTableList {
     String type;
     Object value;
     Boolean changeable;
+    String url;
 
     public ViewTableList(String name, String type, Object value) {
         this.name = name;
         this.type = type;
         this.value = value;
         this.changeable = false;
+        this.url = "";
     }
 
-    public ViewTableList(String name, String type, Object value, Boolean changeable) {
+    public ViewTableList(String name, String type, Object value, Boolean changeable, String url) {
         this.name = name;
         this.type = type;
         this.value = value;
         this.changeable = changeable;
+        this.url = url;
     }
 
     public String getName() {
@@ -50,5 +53,13 @@ public class ViewTableList {
 
     public void setChangeable(Boolean changeable) {
         this.changeable = changeable;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

@@ -11,6 +11,8 @@
 <body>
     <div class="content">
         <h1 th:text="${title}"></h1>
+        <a th:if="${type=='view' && canUpdate == true}" th:href="${'/update'+table+'?id='+id}" class="button">Edit</a>
+        <a th:if="${type=='view' && canDelete == true}" th:href="${'/delete'+table+'?id='+id}" class="button">Delete</a>
         <form action="" method="post" class="form" id="form">
         <div class="values">
             <div th:each="item : ${list}" th:switch="${item.type}">
@@ -24,8 +26,13 @@
                 </div>
                 <div th:case="list">
                     <h2 th:text="${item.name}"></h2>
+                    <a th:if="${type=='view' && canUpdate == true && item.Changeable == true}" th:href="${'/add' + item.url + '?id=' + id}" class="button">Add</a>
                     <div class="overflowList">
-                        <p th:each="element : ${item.value}" th:text="${element}"></p>
+                        <div th:each="element : ${item.value}" class="inline">
+                            <p th:text="${element.value}"></p>
+                            <a th:if="${type=='view' && canUpdate==true && item.Changeable == true}" th:href="${'/delete' + item.url + element.url}">Remove</a>
+                        </div>
+                        
                     </div>
                 </div>
                 <div th:case="inputText">

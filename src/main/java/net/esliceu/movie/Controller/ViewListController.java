@@ -1,8 +1,10 @@
 package net.esliceu.movie.Controller;
 
 import jakarta.servlet.http.HttpSession;
+import net.esliceu.movie.Exceptions.ObjectNotFoundException;
 import net.esliceu.movie.Model.User;
 import net.esliceu.movie.Service.FindAllService;
+import net.esliceu.movie.Service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,94 +14,138 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ViewListController {
     @Autowired
     HttpSession httpSession;
+    @Autowired
+    PermissionService permissionService;
 
-    private void SetStatusAndPermissions(Model model, String table){
+    private void SetStatusAndPermissions(Model model, String table, String type) throws ObjectNotFoundException {
         User user = (User) httpSession.getAttribute("user");
         Boolean logged = false;
-
+        Boolean canAdd = false;
         if(user != null){
             logged = true;
-            model.addAttribute("status", user.getStatus());
+            canAdd = permissionService.checkPermission("Add", table, user);
         }
         model.addAttribute("logged", logged);
+        model.addAttribute("canAdd", canAdd);
+        model.addAttribute("type", type);
+        model.addAttribute("addValue", table);
     }
 
     @GetMapping("/viewMovies")
     public String viewMovies(Model model){
-        SetStatusAndPermissions(model, "Movie");
-        model.addAttribute("type", "Movies");
-        return "viewList";
+        try {
+            SetStatusAndPermissions(model, "Movie", "Movies");
+            return "viewList";
+        } catch (ObjectNotFoundException e) {
+            return "redirect:/error";
+        }
     }
     @GetMapping("/viewPersons")
     public String viewPersons(Model model){
-        SetStatusAndPermissions(model, "Person");
-        model.addAttribute("type", "Persons");
-        return "viewList";
+        try {
+            SetStatusAndPermissions(model, "Person", "Persons");
+            return "viewList";
+        } catch (ObjectNotFoundException e) {
+            return "redirect:/error";
+        }
     }
     @GetMapping("/viewUsers")
     public String viewUsers(Model model){
-        SetStatusAndPermissions(model, "User");
-        model.addAttribute("type", "Users");
-        return "viewList";
+        try {
+            SetStatusAndPermissions(model, "User", "Users");
+            return "viewList";
+        } catch (ObjectNotFoundException e) {
+            return "redirect:/error";
+        }
     }
     @GetMapping("/viewCountries")
     public String viewCountries(Model model){
-        SetStatusAndPermissions(model, "Country");
-        model.addAttribute("type", "Countrys");
-        return "viewList";
+        try {
+            SetStatusAndPermissions(model, "Country", "Countrys");
+            return "viewList";
+        } catch (ObjectNotFoundException e) {
+            return "redirect:/error";
+        }
     }
     @GetMapping("/viewCompanies")
     public String viewCompanies(Model model){
-        SetStatusAndPermissions(model, "Company");
-        model.addAttribute("type", "Companys");
-        return "viewList";
+        try {
+            SetStatusAndPermissions(model, "Company", "Companys");
+            return "viewList";
+        } catch (ObjectNotFoundException e) {
+            return "redirect:/error";
+        }
     }
     @GetMapping("/viewKeywords")
     public String viewKeywords(Model model){
-        SetStatusAndPermissions(model, "Keyword");
-        model.addAttribute("type", "Keywords");
-        return "viewList";
+        try {
+            SetStatusAndPermissions(model, "Keyword", "Keywords");
+            return "viewList";
+        } catch (ObjectNotFoundException e) {
+            return "redirect:/error";
+        }
     }
     @GetMapping("/viewPermissions")
     public String viewPermissions(Model model){
-        SetStatusAndPermissions(model, "Permission");
-        model.addAttribute("type", "Permissions");
-        return "viewList";
+        try {
+            SetStatusAndPermissions(model, "Permission", "Permissions");
+            return "viewList";
+        } catch (ObjectNotFoundException e) {
+            return "redirect:/error";
+        }
     }
     @GetMapping("/viewLanguageRoles")
     public String viewLanguageRoles(Model model){
-        SetStatusAndPermissions(model, "LanguageRole");
-        model.addAttribute("type", "LanguageRoles");
-        return "viewList";
+        try {
+            SetStatusAndPermissions(model, "LanguageRole", "LanguageRoles");
+            return "viewList";
+        } catch (ObjectNotFoundException e) {
+            return "redirect:/error";
+        }
     }
     @GetMapping("/viewLanguages")
     public String viewLanguages(Model model){
-        SetStatusAndPermissions(model, "Language");
-        model.addAttribute("type", "Languages");
-        return "viewList";
+        try {
+            SetStatusAndPermissions(model, "Language", "Languages");
+            return "viewList";
+        } catch (ObjectNotFoundException e) {
+            return "redirect:/error";
+        }
     }
     @GetMapping("/viewGenders")
     public String viewGenders(Model model){
-        SetStatusAndPermissions(model, "Gender");
-        model.addAttribute("type", "Genders");
-        return "viewList";
+        try {
+            SetStatusAndPermissions(model, "Gender", "Genders");
+            return "viewList";
+        } catch (ObjectNotFoundException e) {
+            return "redirect:/error";
+        }
     }
     @GetMapping("/viewGenres")
     public String viewGenres(Model model){
-        SetStatusAndPermissions(model, "Genre");
-        model.addAttribute("type", "Genres");
-        return "viewList";
+        try {
+            SetStatusAndPermissions(model, "Genre", "Genres");
+            return "viewList";
+        } catch (ObjectNotFoundException e) {
+            return "redirect:/error";
+        }
     }
     @GetMapping("/viewDepartments")
     public String viewDepartments(Model model){
-        SetStatusAndPermissions(model, "Department");
-        model.addAttribute("type", "Departments");
-        return "viewList";
+        try {
+            SetStatusAndPermissions(model, "Department", "Departments");
+            return "viewList";
+        } catch (ObjectNotFoundException e) {
+            return "redirect:/error";
+        }
     }
     @GetMapping("/viewAdminRoles")
     public String viewAdminRoles(Model model){
-        SetStatusAndPermissions(model, "AdminRole");
-        model.addAttribute("type", "AdminRoles");
-        return "viewList";
+        try {
+            SetStatusAndPermissions(model, "AdminRole", "AdminRoles");
+            return "viewList";
+        } catch (ObjectNotFoundException e) {
+            return "redirect:/error";
+        }
     }
 }

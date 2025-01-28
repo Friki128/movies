@@ -40,7 +40,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "Company", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         List<ViewTableList> list = new ArrayList<>();
         list.add(new ViewTableList("name", "inputText", ""));
@@ -56,7 +56,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "Company", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         addService.addCompany(name);
         return "redirect:/viewCompanies";
@@ -69,7 +69,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "Country", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         List<ViewTableList> list = new ArrayList<>();
         list.add(new ViewTableList("name", "inputText", ""));
@@ -86,7 +86,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "Country", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         addService.addCountry(isoCode, name);
         return "redirect:/viewCountries";
@@ -99,7 +99,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "Person", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         List<ViewTableList> list = new ArrayList<>();
         list.add(new ViewTableList("name", "inputText", ""));
@@ -115,7 +115,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "Person", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         addService.addPerson(name);
         return "redirect:/viewPersons";
@@ -128,7 +128,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "User", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         List<ViewTableList> list = new ArrayList<>();
         list.add(new ViewTableList("name", "inputText", ""));
@@ -147,7 +147,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "User", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             addService.addUser(name, password, email, status);
@@ -159,7 +159,7 @@ public class AddController {
         } catch (UserNameInUseException e) {
             redirectAttributes.addAttribute("error", "User Name Already In Use");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
 
     @GetMapping("/addPermission")
@@ -169,7 +169,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "Permission", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         List<ViewTableList> list = new ArrayList<>();
         list.add(new ViewTableList("name", "inputText", ""));
@@ -185,7 +185,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "Permission", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         addService.addPermission(name);
         return "redirect:/viewPermissions";
@@ -198,7 +198,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "Language", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         List<ViewTableList> list = new ArrayList<>();
         list.add(new ViewTableList("name", "inputText", ""));
@@ -215,7 +215,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "Language", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         addService.addLanguage(code, name);
         return "redirect:/viewLanguages";
@@ -228,7 +228,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "LanguageRole", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         List<ViewTableList> list = new ArrayList<>();
         list.add(new ViewTableList("role", "inputText", ""));
@@ -244,7 +244,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "LanguageRole", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         addService.addLanguageRole(role);
         return "redirect:/viewLanguageRoles";
@@ -257,7 +257,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "Keyword", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         List<ViewTableList> list = new ArrayList<>();
         list.add(new ViewTableList("name", "inputText", ""));
@@ -273,7 +273,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "Keyword", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         addService.addKeyword(name);
         return "redirect:/viewKeywords";
@@ -286,7 +286,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "Genre", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         List<ViewTableList> list = new ArrayList<>();
         list.add(new ViewTableList("name", "inputText", ""));
@@ -302,7 +302,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "Genre", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         addService.addGenre(name);
         return "redirect:/viewGenres";
@@ -315,7 +315,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "AdminRole", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         List<ViewTableList> list = new ArrayList<>();
         list.add(new ViewTableList("name", "inputText", ""));
@@ -331,7 +331,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "AdminRole", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         addService.addAdminRole(name);
         return "redirect:/viewAdminRoles";
@@ -344,7 +344,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "Gender", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         List<ViewTableList> list = new ArrayList<>();
         list.add(new ViewTableList("id", "inputNumber", ""));
@@ -361,7 +361,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "Gender", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         addService.addGender(id, name);
         return "redirect:/viewGenders";
@@ -374,7 +374,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "Department", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         List<ViewTableList> list = new ArrayList<>();
         list.add(new ViewTableList("name", "inputText", ""));
@@ -390,7 +390,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "Department", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         addService.addDepartment(name);
         return "redirect:/viewDepartments";
@@ -403,7 +403,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "Movie", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         List<ViewTableList> list = new ArrayList<>();
         list.add(new ViewTableList("title", "inputText", ""));
@@ -430,7 +430,7 @@ public class AddController {
             if(!permissionService.checkPermission("Add", "Movie", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         addService.addMovie(title, budget, homepage, overview, popularity, releaseDate, revenue, runtime, status, tagline, voteAverage, voteCount);
         return "redirect:/viewMovies";
@@ -443,7 +443,7 @@ public class AddController {
             if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             Movie movie = findService.getMovie(id);
@@ -458,7 +458,7 @@ public class AddController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Movie Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
 
     @PostMapping("/addMoviesLanguages")
@@ -468,7 +468,7 @@ public class AddController {
             if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             addService.addMovieLanguage(id, language, role);
@@ -476,7 +476,7 @@ public class AddController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Element Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
 
     @GetMapping("/addMoviesKeywords")
@@ -486,7 +486,7 @@ public class AddController {
             if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             Movie movie = findService.getMovie(id);
@@ -500,7 +500,7 @@ public class AddController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Movie Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @PostMapping("/addMoviesKeywords")
     public String addPostMoviesKeywords(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam int keyword){
@@ -509,7 +509,7 @@ public class AddController {
             if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             addService.addMovieKeyword(id, keyword);
@@ -517,7 +517,7 @@ public class AddController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Element Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
 
     @GetMapping("/addMoviesGenres")
@@ -527,7 +527,7 @@ public class AddController {
             if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             Movie movie = findService.getMovie(id);
@@ -541,7 +541,7 @@ public class AddController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Movie Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @PostMapping("/addMoviesGenres")
     public String addPostMoviesGenres(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam int genre){
@@ -550,7 +550,7 @@ public class AddController {
             if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             addService.addMovieGenre(id, genre);
@@ -558,7 +558,7 @@ public class AddController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Element Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
 
     @GetMapping("/addMoviesCompanies")
@@ -568,7 +568,7 @@ public class AddController {
             if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             Movie movie = findService.getMovie(id);
@@ -582,7 +582,7 @@ public class AddController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Movie Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @PostMapping("/addMoviesCompanies")
     public String addPostMoviesCompanies(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam int company){
@@ -591,7 +591,7 @@ public class AddController {
             if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             addService.addMovieCompany(id, company);
@@ -599,7 +599,7 @@ public class AddController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Element Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
 
     @GetMapping("/addMoviesCountries")
@@ -609,7 +609,7 @@ public class AddController {
             if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             Movie movie = findService.getMovie(id);
@@ -623,7 +623,7 @@ public class AddController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Movie Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @PostMapping("/addMoviesCountries")
     public String addPostMoviesCountries(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam int country){
@@ -632,7 +632,7 @@ public class AddController {
             if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             addService.addProductionCountry(id, country);
@@ -640,7 +640,7 @@ public class AddController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Element Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @GetMapping("/addMoviesCrew")
     public String addGetMoviesCrew(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
@@ -649,7 +649,7 @@ public class AddController {
             if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             Movie movie = findService.getMovie(id);
@@ -665,7 +665,7 @@ public class AddController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Movie Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @PostMapping("/addMoviesCrew")
     public String addPostMoviesCrew(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam int person, @RequestParam int department, @RequestParam String job){
@@ -674,7 +674,7 @@ public class AddController {
             if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             addService.addCrewMember(department, id, person, job);
@@ -682,7 +682,7 @@ public class AddController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Element Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
 
     @GetMapping("/addMoviesCast")
@@ -692,7 +692,7 @@ public class AddController {
             if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             Movie movie = findService.getMovie(id);
@@ -709,7 +709,7 @@ public class AddController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Movie Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @PostMapping("/addMoviesCast")
     public String addPostMoviesCast(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam int person, @RequestParam int gender, @RequestParam String name, @RequestParam int order){
@@ -718,7 +718,7 @@ public class AddController {
             if(!permissionService.checkPermission("Update", "Movie", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             addService.addCast(id, person, gender, name, order);
@@ -726,7 +726,7 @@ public class AddController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Element Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @GetMapping("/addUserPermissions")
     public String addGetUserPermissions(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
@@ -735,7 +735,7 @@ public class AddController {
             if(!permissionService.checkPermission("Update", "User", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             User user = findService.getUser(id);
@@ -749,7 +749,7 @@ public class AddController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "User Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @PostMapping("/addUserPermissions")
     public String addPostUserPermissions(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam int adminRole){
@@ -758,7 +758,7 @@ public class AddController {
             if(!permissionService.checkPermission("Update", "User", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             addService.addAuthorization(adminRole, id, "approved");
@@ -766,7 +766,7 @@ public class AddController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Element Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @GetMapping("/addRolePermissions")
     public String addGetRolePermissions(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
@@ -775,7 +775,7 @@ public class AddController {
             if(!permissionService.checkPermission("Update", "AdminRole", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             AdminRole adminRole = findService.getAdminRole(id);
@@ -789,7 +789,7 @@ public class AddController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "AdminRole Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
     @PostMapping("/addRolePermissions")
     public String addPostRolePermissions(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam int permission){
@@ -798,7 +798,7 @@ public class AddController {
             if(!permissionService.checkPermission("Update", "AdminRole", user))throw new IncorrectPermissionsException();
         } catch (Exception e){
             redirectAttributes.addAttribute("error", "Cannot access this page.");
-            return "redirect:/errorDisplay";
+            return "redirect:/error";
         }
         try {
             addService.addRolePermission(id, permission);
@@ -806,6 +806,6 @@ public class AddController {
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Element Not Found");
         }
-        return "redirect:/errorDisplay";
+        return "redirect:/error";
     }
 }

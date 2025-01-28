@@ -76,4 +76,9 @@ public class UserController {
         model.addAttribute("title", "register");
         return "loginRegisterForm";
     }
+    @GetMapping("/logout")
+    public String logout(Model model){
+        httpSession.removeAttribute("user");
+        return "redirect:/login";
+    }
 }

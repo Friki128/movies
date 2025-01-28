@@ -50,4 +50,9 @@ public class Authorization implements MappableContainer{
             default -> getId().getUser().getName();
         };
     }
+
+    @Override
+    public String url() {
+        return "?user=" + getId().getUser().getId() + "&adminRole=" + getId().getAdminRole().getId();
+    }
 }

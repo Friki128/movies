@@ -38,4 +38,9 @@ public class MovieKeyword implements MappableContainer{
             default -> getId().getMovie().getName();
         };
     }
+
+    @Override
+    public String url() {
+        return "?movie=" + getId().getMovie().getId() + "&keyword=" + getId().getKeyword().getId();
+    }
 }

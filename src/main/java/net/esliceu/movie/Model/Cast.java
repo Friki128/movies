@@ -68,4 +68,9 @@ public class Cast implements MappableContainer, Mappable{
             default -> this.getCastId().getPerson().getName() + " As " + this.getName() + " in " + this.getCastId().getMovie().getTitle();
         };
     }
+
+    @Override
+    public String url() {
+        return "?movie=" + getCastId().getMovie().getId() + "&person=" + getCastId().getPerson().getId() + "&gender=" + getCastId().getGender().getId();
+    }
 }

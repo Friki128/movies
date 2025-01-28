@@ -41,4 +41,9 @@ public class MovieLanguage implements MappableContainer{
         };
     }
 
+    @Override
+    public String url() {
+        return "?language=" + getId().getLanguage().getId() + "&languageRole=" + getId().getLanguageRole().getId() + "&movie=" + getId().getMovie().getId();
+    }
+
 }

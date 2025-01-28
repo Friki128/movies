@@ -38,4 +38,9 @@ public class RolePermission implements MappableContainer{
             default -> getId().getAdminRole().getName();
         };
     }
+
+    @Override
+    public String url() {
+        return "?permission=" + getId().getPermission().getId() + "&adminRole=" + getId().getAdminRole().getId();
+    }
 }
