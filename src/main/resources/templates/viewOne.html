@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
     <title th:text="${title}"></title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
 </head>
 <body>
     <div class="content">
         <h1 th:text="${title}"></h1>
-        <form action="#" method="post" class="form">
+        <form action="" method="post" class="form" id="form">
         <div class="values">
             <div th:each="item : ${list}" th:switch="${item.type}">
                 <div th:case="para">
@@ -29,6 +31,11 @@
                 <div th:case="inputText">
                     <label th:for="${item.name}" th:text="${item.name}"></label>
                     <input type="text" th:name="${item.name}" th:id="${item.name}" th:value="${item.value}">
+                </div>
+                <div th:case="inputAuto">
+                    <label th:for="${item.name}" th:text="${item.name}"></label>
+                    <input type="text" th:name="${'select' + item.name}" th:id="${'select' + item.name}" th:value="${item.value}" class="auto">
+                    <input type="number" th:name="${item.name}" th:id="${item.name}" class="hidden">
                 </div>
                 <div th:case="inputNumber">
                     <label th:for="${item.name}" th:text="${item.name}"></label>
@@ -63,4 +70,5 @@
         </form>
     </div>
 </body>
+<script src="/js/viewOne.js"></script>
 </html>
