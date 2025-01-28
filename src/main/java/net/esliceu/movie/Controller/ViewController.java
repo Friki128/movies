@@ -60,6 +60,7 @@ public class ViewController {
             list.add(new ViewTableList("Characters", "list", DTOUtil.printContainers(cast, "movie"), true));
             list.add(new ViewTableList("Countries", "list", DTOUtil.printContainers(countries, "movie"), true));
             model.addAttribute("list", list);
+            model.addAttribute("type", "view");
             return "viewOne";
         } catch (ObjectNotFoundException e) {
             redirectAttributes.addAttribute("error", "Movie Not Found");
@@ -77,6 +78,7 @@ public class ViewController {
             list.add(new ViewTableList("Played", "list", DTOUtil.printContainers(cast, "person")));
             list.add(new ViewTableList("Worked", "list", DTOUtil.printContainers(crew, "person")));
             model.addAttribute("id", id);
+            model.addAttribute("type", "view");
             model.addAttribute("title", person.getName());
             model.addAttribute("list", list);
             return "viewOne";
@@ -94,6 +96,7 @@ public class ViewController {
             list.add(new ViewTableList("Email", "para", user.getEmail()));
             list.add(new ViewTableList("Status", "para", user.getStatus()));
             model.addAttribute("id", id);
+            model.addAttribute("type", "view");
             model.addAttribute("title", user.getName());
             model.addAttribute("list", list);
             return "viewOne";
@@ -109,6 +112,7 @@ public class ViewController {
             List<ViewTableList> list = new ArrayList<>();
             list.add(new ViewTableList("Name", "para", permission.getName()));
             model.addAttribute("id", id);
+            model.addAttribute("type", "view");
             model.addAttribute("title", permission.getName());
             model.addAttribute("list", list);
             return "viewOne";
@@ -126,6 +130,7 @@ public class ViewController {
             list.add(new ViewTableList("Name", "para", languageRole.getName()));
             list.add(new ViewTableList("Movies", "list", DTOUtil.printContainers(movieLanguages, "role")));
             model.addAttribute("id", id);
+            model.addAttribute("type", "view");
             model.addAttribute("title", languageRole.getName());
             model.addAttribute("list", list);
             return "viewOne";
@@ -144,6 +149,7 @@ public class ViewController {
             list.add(new ViewTableList("Code", "para", language.getCode()));
             list.add(new ViewTableList("Movies", "list", DTOUtil.printContainers(movieLanguages, "language")));
             model.addAttribute("id", id);
+            model.addAttribute("type", "view");
             model.addAttribute("title", language.getName());
             model.addAttribute("list", list);
             return "viewOne";
@@ -162,6 +168,7 @@ public class ViewController {
             list.add(new ViewTableList("Iso", "para", country.getIsoCode()));
             list.add(new ViewTableList("Movies", "list", DTOUtil.printContainers(movies, "country")));
             model.addAttribute("id", id);
+            model.addAttribute("type", "view");
             model.addAttribute("title", country.getName());
             model.addAttribute("list", list);
             return "viewOne";
@@ -179,6 +186,7 @@ public class ViewController {
             list.add(new ViewTableList("Name", "para", company.getName()));
             list.add(new ViewTableList("Movies", "list", DTOUtil.printContainers(movies, "company")));
             model.addAttribute("id", id);
+            model.addAttribute("type", "view");
             model.addAttribute("title", company.getName());
             model.addAttribute("list", list);
             return "viewOne";
@@ -196,6 +204,7 @@ public class ViewController {
             list.add(new ViewTableList("Name", "para", keyword.getName()));
             list.add(new ViewTableList("Movies", "list", DTOUtil.printContainers(movies, "keyword")));
             model.addAttribute("id", id);
+            model.addAttribute("type", "view");
             model.addAttribute("title", keyword.getName());
             model.addAttribute("list", list);
             return "viewOne";
@@ -213,6 +222,7 @@ public class ViewController {
             list.add(new ViewTableList("Name", "para", department.getName()));
             list.add(new ViewTableList("Work", "list", DTOUtil.printContainers(crewMembers, "department")));
             model.addAttribute("id", id);
+            model.addAttribute("type", "view");
             model.addAttribute("title", department.getName());
             model.addAttribute("list", list);
             return "viewOne";
@@ -230,6 +240,7 @@ public class ViewController {
             list.add(new ViewTableList("name", "para", gender.getName()));
             list.add(new ViewTableList("Characters", "list", DTOUtil.printContainers(characters, "gender")));
             model.addAttribute("id", id);
+            model.addAttribute("type", "view");
             model.addAttribute("title", gender.getName());
             model.addAttribute("list", list);
             return "viewOne";
@@ -247,6 +258,7 @@ public class ViewController {
             list.add(new ViewTableList("Name", "para", genre.getName()));
             list.add(new ViewTableList("Movies", "list", DTOUtil.printContainers(movies, "genre")));
             model.addAttribute("id", id);
+            model.addAttribute("type", "view");
             model.addAttribute("title", genre.getName());
             model.addAttribute("list", list);
             return "viewOne";

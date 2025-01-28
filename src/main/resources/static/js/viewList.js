@@ -75,7 +75,8 @@ async function loadAutocomple(url){
           source: list,
           minLength: 3,
           select: async function (event, ui) {
-            if(ui.item.id != undefined) currentId = ui.item.id
+            if(ui.item.id != undefined && selected != undefined) currentId = ui.item.id
+            if(type.textContent != "Movies") currentId = ui.item.value
             page.value = 0;
             await sleep(10)
             loadList();

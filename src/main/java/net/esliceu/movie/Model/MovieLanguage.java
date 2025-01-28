@@ -36,7 +36,7 @@ public class MovieLanguage implements MappableContainer{
     public String print(String exclude) {
         return switch (exclude){
             case "role" -> this.getId().getMovie().getTitle() + " in " + this.getId().getLanguage().getName();
-            case "movie" -> this.getId().getLanguage().getName() + " " + this.getId().getLanguage().getName();
+            case "movie" -> this.getId().getLanguage().getName() + " " + this.getId().getLanguageRole().getName();
             default -> this.getId().getMovie().getTitle() + " " +this.getId().getLanguageRole().getName();
         };
     }

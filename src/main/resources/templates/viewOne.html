@@ -9,6 +9,7 @@
 <body>
     <div class="content">
         <h1 th:text="${title}"></h1>
+        <form action="#" method="post" class="form">
         <div class="values">
             <div th:each="item : ${list}" th:switch="${item.type}">
                 <div th:case="para">
@@ -25,8 +26,38 @@
                         <p th:each="element : ${item.value}" th:text="${element}"></p>
                     </div>
                 </div>
+                <div th:case="inputText">
+                    <label th:for="${item.name}" th:text="${item.name}"></label>
+                    <input type="text" th:name="${item.name}" th:id="${item.name}" th:value="${item.value}">
+                </div>
+                <div th:case="inputNumber">
+                    <label th:for="${item.name}" th:text="${item.name}"></label>
+                    <input type="number" th:name="${item.name}" th:id="${item.name}" th:value="${item.value}">
+                </div>
+                <div th:case="inputFloat">
+                    <label th:for="${item.name}" th:text="${item.name}"></label>
+                    <input type="number" th:name="${item.name}" th:id="${item.name}" th:value="${item.value}" step="0.01">
+                </div>
+                <div th:case="inputDate">
+                    <label th:for="${item.name}" th:text="${item.name}"></label>
+                    <input type="date" th:name="${item.name}" th:id="${item.name}" th:value="${item.value}">
+                </div>
+                <div th:case="inputPassword">
+                    <label th:for="${item.name}" th:text="${item.name}"></label>
+                    <input type="password" th:name="${item.name}" th:id="${item.name}" th:value="${item.value}">
+                </div>
+                <div th:case="inputEmail">
+                    <label th:for="${item.name}" th:text="${item.name}"></label>
+                    <input type="email" th:name="${item.name}" th:id="${item.name}" th:value="${item.value}">
+                </div>
+                <div th:case="inputTextArea">
+                    <label th:for="${item.name}" th:text="${item.name}"></label>
+                    <textarea th:name="${item.name}" th:id="${item.name}" th:value="${item.value}"></textarea>
+                </div>
             </div>
         </div>
+        <input type="submit" class="button" th:if="${type != 'view'}" th:value="${type}">
+        </form>
     </div>
 </body>
 </html>
