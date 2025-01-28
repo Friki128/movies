@@ -71,7 +71,7 @@ public class FindService {
         return getValue(id, companyRepo);
     }
 
-    public ProductionCountry getCompanyCountry(ProductionCountryId id) throws ObjectNotFoundException {
+    public ProductionCountry getProductionCountry(ProductionCountryId id) throws ObjectNotFoundException {
         return getValue(id, productionCountryRepo);
     }
 

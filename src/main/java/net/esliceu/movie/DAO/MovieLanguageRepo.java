@@ -1,5 +1,6 @@
 package net.esliceu.movie.DAO;
 
+import jakarta.transaction.Transactional;
 import net.esliceu.movie.Model.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,4 +14,13 @@ public interface MovieLanguageRepo extends JpaRepository<MovieLanguage, MovieLan
     List<MovieLanguage> findAllByIdLanguage(Language language);
 
     List<MovieLanguage> findAllByIdLanguageRole(LanguageRole languageRole);
+
+    @Transactional
+    void deleteAllByIdMovie(Movie movie);
+
+    @Transactional
+    void deleteAllByIdLanguage(Language language);
+
+    @Transactional
+    void deleteAllByIdLanguageRole(LanguageRole languageRole);
 }

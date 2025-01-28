@@ -1,5 +1,6 @@
 package net.esliceu.movie.DAO;
 
+import jakarta.transaction.Transactional;
 import net.esliceu.movie.Model.Keyword;
 import net.esliceu.movie.Model.Movie;
 import net.esliceu.movie.Model.MovieKeyword;
@@ -14,4 +15,10 @@ public interface MovieKeywordRepo extends JpaRepository<MovieKeyword, MovieKeywo
     List<MovieKeyword> findAllByIdMovie(Movie movie);
 
     List<MovieKeyword> findAllByIdKeyword(Keyword keyword);
+
+    @Transactional
+    void deleteAllByIdMovie(Movie movie);
+
+    @Transactional
+    void deleteAllByIdKeyword(Keyword keyword);
 }

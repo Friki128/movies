@@ -1,5 +1,6 @@
 package net.esliceu.movie.DAO;
 
+import jakarta.transaction.Transactional;
 import net.esliceu.movie.Model.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,4 +14,13 @@ public interface CrewMemberRepo extends JpaRepository<CrewMember, CrewMemberId> 
     List<CrewMember> findAllByIdPerson(Person person);
 
     List<CrewMember> findAllByIdDepartment(Department id);
+
+    @Transactional
+    void deleteAllByIdMovie(Movie movie);
+
+    @Transactional
+    void deleteAllByIdDepartment(Department department);
+
+    @Transactional
+    void deleteAllByIdPerson(Person person);
 }

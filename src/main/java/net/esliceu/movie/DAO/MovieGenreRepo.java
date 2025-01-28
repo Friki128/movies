@@ -1,5 +1,6 @@
 package net.esliceu.movie.DAO;
 
+import jakarta.transaction.Transactional;
 import net.esliceu.movie.Model.Genre;
 import net.esliceu.movie.Model.Movie;
 import net.esliceu.movie.Model.MovieGenre;
@@ -14,4 +15,10 @@ public interface MovieGenreRepo extends JpaRepository<MovieGenre, MovieGenreId> 
     List<MovieGenre> findAllByIdMovie(Movie movie);
 
     List<MovieGenre> findAllByIdGenre(Genre genre);
+
+    @Transactional
+    void deleteAllByIdMovie(Movie movie);
+
+    @Transactional
+    void deleteAllByIdGenre(Genre genre);
 }

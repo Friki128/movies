@@ -1,5 +1,6 @@
 package net.esliceu.movie.DAO;
 
+import jakarta.transaction.Transactional;
 import net.esliceu.movie.Model.Company;
 import net.esliceu.movie.Model.Movie;
 import net.esliceu.movie.Model.MovieCompany;
@@ -14,4 +15,10 @@ public interface MovieCompanyRepo extends JpaRepository<MovieCompany, MovieCompa
     List<MovieCompany> findAllByIdMovie(Movie movie);
 
     List<MovieCompany> findAllByIdCompany(Company company);
+
+    @Transactional
+    void deleteAllByIdMovie(Movie movie);
+
+    @Transactional
+    void deleteAllByIdCompany(Company company);
 }

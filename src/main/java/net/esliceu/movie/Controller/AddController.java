@@ -236,7 +236,7 @@ public class AddController {
         return "redirect:/viewMovies";
     }
 
-    @GetMapping("/addMoviesLanguage")
+    @GetMapping("/addMoviesLanguages")
     public String addGetMoviesLanguage(Model model, RedirectAttributes redirectAttributes, @RequestParam int id){
         try {
             Movie movie = findService.getMovie(id);
@@ -254,7 +254,7 @@ public class AddController {
         return "redirect:/errorDisplay";
     }
 
-    @PostMapping("/addMoviesLanguage")
+    @PostMapping("/addMoviesLanguages")
     public String addPostMoviesLanguage(Model model, RedirectAttributes redirectAttributes, @RequestParam int id, @RequestParam int role, @RequestParam int language){
         try {
             addService.addMovieLanguage(id, language, role);
