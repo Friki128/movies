@@ -34,6 +34,9 @@
                     <label th:for="${item.name}" th:text="${item.name}"></label>
                     <input type="number" th:name="${item.name}" th:id="${item.name}" th:value="${item.value}">
                 </div>
+                <div th:case="inputId" class="hidden">
+                    <input type="number" th:name="${item.name}" th:id="${item.name}" th:value="${item.value}" hidden>
+                </div>
                 <div th:case="inputFloat">
                     <label th:for="${item.name}" th:text="${item.name}"></label>
                     <input type="number" th:name="${item.name}" th:id="${item.name}" th:value="${item.value}" step="0.01">
@@ -52,7 +55,7 @@
                 </div>
                 <div th:case="inputTextArea">
                     <label th:for="${item.name}" th:text="${item.name}"></label>
-                    <textarea th:name="${item.name}" th:id="${item.name}" th:value="${item.value}"></textarea>
+                    <textarea th:name="${item.name}" th:id="${item.name}" th:text="${item.value}"></textarea>
                 </div>
             </div>
         </div>

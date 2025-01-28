@@ -86,6 +86,7 @@ public class AddController {
     public String addPostUser(Model model, RedirectAttributes redirectAttributes, @RequestParam String name, @RequestParam String password, @RequestParam String email, @RequestParam String status){
         try {
             addService.addUser(name, password, email, status);
+            return "redirect:/viewUsers";
         } catch (EmptyNameException e) {
             redirectAttributes.addAttribute("error", "Empty Name");
         } catch (PasswordTooShortException e) {
@@ -93,7 +94,7 @@ public class AddController {
         } catch (UserNameInUseException e) {
             redirectAttributes.addAttribute("error", "User Name Already In Use");
         }
-        return "redirect:/viewUsers";
+        return "redirect:/errorDisplay";
     }
 
     @GetMapping("/addPermission")

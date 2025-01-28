@@ -149,20 +149,20 @@ public class UpdateService {
     public void updatePerson(int id, String name) throws ObjectNotFoundException {
         Person person = new Person(name);
         person.setId(id);
-        updateObject(id, person, permissionRepo);
+        updateObject(id, person, personRepo);
     }
 
-    public void updateUser(int id, String name, String password, String email, String status) throws ObjectNotFoundException, EmptyNameException, PasswordTooShortException, UserNameInUseException {
+    public void updateUser(int id, String name, String email, String status) throws ObjectNotFoundException, EmptyNameException, UserNameInUseException {
         String processedName = name.replace(" ", "");
-        String hashedPassword = HashUtil.hash(password);
         if(name.isEmpty()) throw new EmptyNameException();
-        if(password.length() <= 5) throw new PasswordTooShortException();
         try {
             User user = findService.getUserByName(processedName);
             throw new UserNameInUseException();
         }catch (ObjectNotFoundException e) {
-            User user = new User(processedName, hashedPassword, email, status);
-            user.setId(id);
+            User user = findService.getUser(id);
+            user.setStatus(status);
+            user.setName(name);
+            user.setEmail(email);
             updateObject(id, user, userRepo);
         }
     }
